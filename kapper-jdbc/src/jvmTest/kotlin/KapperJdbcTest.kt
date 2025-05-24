@@ -8,32 +8,42 @@ import com.github.kantis.kapper.queryFor
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 
-data class Foo(val bar: String)
+data class Book(val author: String, val title: String, val numberOfPages: Int)
 
 class KapperJdbcTest : FunSpec(
    {
       test("integrate with H2 JDBC data source") {
          val kapper =
             Kapper {
-               registerMapper { row -> Foo(row["bar"] as String) }
+               registerMapper { row -> Book(row["author"] as String, row["title"] as String, row["number_of_pages"] as Int) }
             }
 
          val dataSource = H2Helpers.prepareDatabase(
             "jdbc:h2:mem:test;IGNORECASE=true;MODE=MYSQL;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false;",
-            "CREATE TABLE foo (bar VARCHAR(255))",
+            """
+               CREATE TABLE books (
+                  author VARCHAR(255),
+                  title VARCHAR(255),
+                  number_of_pages INT
+               )
+            """.trimIndent(),
          )
 
          dataSource.transaction {
-            kapper.execute<Foo>(Query("INSERT INTO foo (bar) VALUES (?)"), "baz", "qux")
+            kapper.execute(
+               Query("INSERT INTO books (author, title, number_of_pages) VALUES (?, ?, ?)"),
+               listOf("JRR Tolkien", "The Hobbit", 310),
+               listOf("George Orwell", "1984", 328),
+            )
 
-            kapper.queryFor<Foo>(Query("SELECT * FROM foo")) shouldBe
+            kapper.queryFor<Book>(Query("SELECT * FROM books")) shouldBe
                listOf(
-                  Foo("baz"),
-                  Foo("qux"),
+                  Book("JRR Tolkien", "The Hobbit", 310),
+                  Book("George Orwell", "1984", 328),
                )
 
-            kapper.queryFor<Foo>(Query("SELECT * FROM foo WHERE bar LIKE 'ba%'")) shouldBe
-               listOf(Foo("baz"))
+            kapper.queryFor<Book>(Query("SELECT * FROM books WHERE number_of_pages > ?"), 320) shouldBe
+               listOf(Book("George Orwell", "1984", 328))
          }
       }
    },

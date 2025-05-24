@@ -16,6 +16,12 @@ inline fun <reified T> Kapper.queryFor(query: Query): List<T> {
 context(Transaction)
 inline fun <reified T> Kapper.queryFor(
    query: Query,
+   param: Any,
+): List<T> = queryFor(query, listOf(param))
+
+context(Transaction)
+inline fun <reified T> Kapper.queryFor(
+   query: Query,
    params: List<Any>,
 ): List<T> {
    val rowMapper = resolveMapper<T>()
@@ -31,7 +37,7 @@ inline fun <reified T> Kapper.execute(
 }
 
 context(Transaction)
-inline fun <reified T> Kapper.execute(
+inline fun Kapper.execute(
    query: Query,
    vararg params: List<Any>,
 ) {
@@ -39,7 +45,7 @@ inline fun <reified T> Kapper.execute(
 }
 
 context(Transaction)
-inline fun <reified T> Kapper.execute(
+inline fun Kapper.execute(
    query: Query,
    vararg params: Any,
 ) {

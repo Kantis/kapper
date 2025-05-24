@@ -5,6 +5,7 @@ import com.github.kantis.kapper.Query
 import com.github.kantis.kapper.Row
 import com.github.kantis.kapper.Transaction
 import java.sql.Connection
+import java.sql.PreparedStatement
 
 class JdbcTransaction(private val connection: Connection) : Transaction {
    override fun executeInTransaction(
@@ -13,23 +14,7 @@ class JdbcTransaction(private val connection: Connection) : Transaction {
    ) {
       connection.prepareStatement(query.value).use { statement ->
          parameterLists.forEach { params ->
-            val statementParams = statement.parameterMetaData
-            require(params.count() == statementParams.parameterCount) {
-               "Expected ${statementParams.parameterCount} parameters, but got ${params.count()}"
-            }
-            params.forEachIndexed { index, param ->
-               when (param) {
-                  is String -> statement.setString(index + 1, param)
-                  is Int -> statement.setInt(index + 1, param)
-                  is Long -> statement.setLong(index + 1, param)
-                  is Double -> statement.setDouble(index + 1, param)
-                  is Float -> statement.setFloat(index + 1, param)
-                  is Boolean -> statement.setBoolean(index + 1, param)
-                  is ByteArray -> statement.setBytes(index + 1, param)
-                  else -> error("TODO")
-               }
-            }
-
+            bindParameters(statement, params)
             statement.execute()
          }
       }
@@ -38,27 +23,32 @@ class JdbcTransaction(private val connection: Connection) : Transaction {
    override fun query(
       query: Query,
       params: List<Any>,
-   ): List<Row> {
+   ): List<Row> =
       connection.prepareStatement(query.value).use { statement ->
-         val statementParams = statement.parameterMetaData
-         require(params.count() == statementParams.parameterCount) {
-            "Expected ${statementParams.parameterCount} parameters, but got ${params.count()}"
-         }
+         bindParameters(statement, params)
+         statement.executeQuery().let(ResultSetReader::loadResultSet)
+      }
 
-         params.forEachIndexed { index, param ->
-            when (param) {
-               is String -> statement.setString(index + 1, param)
-               is Int -> statement.setInt(index + 1, param)
-               is Long -> statement.setLong(index + 1, param)
-               is Double -> statement.setDouble(index + 1, param)
-               is Float -> statement.setFloat(index + 1, param)
-               is Boolean -> statement.setBoolean(index + 1, param)
-               is ByteArray -> statement.setBytes(index + 1, param)
-               else -> error("TODO")
-            }
-         }
+   private fun bindParameters(
+      statement: PreparedStatement,
+      params: List<Any>,
+   ) {
+      val statementParams = statement.parameterMetaData
+      require(params.count() == statementParams.parameterCount) {
+         "Expected ${statementParams.parameterCount} parameters, but got ${params.count()}"
+      }
 
-         return statement.executeQuery().let(ResultSetReader::loadResultSet)
+      params.forEachIndexed { index, param ->
+         when (param) {
+            is String -> statement.setString(index + 1, param)
+            is Int -> statement.setInt(index + 1, param)
+            is Long -> statement.setLong(index + 1, param)
+            is Double -> statement.setDouble(index + 1, param)
+            is Float -> statement.setFloat(index + 1, param)
+            is Boolean -> statement.setBoolean(index + 1, param)
+            is ByteArray -> statement.setBytes(index + 1, param)
+            else -> error("TODO")
+         }
       }
    }
 }

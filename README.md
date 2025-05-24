@@ -5,6 +5,9 @@ Kapper is inspired by [Dapper](https://github.com/DapperLib/Dapper), a popular m
 - No automated tracking of changes
 - No reflection-based mapping
 - Provide convenient DSLs, so the explicitness doesn't become tedious
+- Explicit transaction management is mandatory
+- Multiplatform design, with JDBC and R2DBC (to-be-added) support added by separate modules.
+  - JS and Native variants not currently planned, raise an issue if you want them.
 
 I want to provide a simple way of working with databases, that does _not_ involve automatic change tracking in "entities".
 I want explicit control over what is being updated, and how. With Kapper, you are in control and can write SQL that fits your exact needs.
@@ -20,16 +23,33 @@ Create a JDBC connection and construct a `Kapper` instance:
 val dbConnection = DriverManager.getConnection("jdbc:your_database_url")
 val jdbcDataSource = JdbcDataSource(dbConnection)
 
+data class Book(val author: String, val title: String, val numberOfPages: Int)
+
 val kapper = Kapper {
-  registerMapper { row -> Foo(row["bar"] as String) } // Register a mapper for the Foo class
+  registerMapper { row ->
+    Book(
+      author = row["author"] as String,
+      title = row["title"] as String,
+      numberOfPages = row["number_of_pages"] as Int
+    )
+  }
 }
 
 // All queries must be executed within a transaction scope.
-jdbcDataSource.transaction {
-  // Execute a query
+dataSource.transaction {
+  kapper.execute(
+    Query("INSERT INTO books (author, title, number_of_pages) VALUES (?, ?, ?)"),
+    listOf("JRR Tolkien", "The Hobbit", 310),
+    listOf("George Orwell", "1984", 328),
+  )
 
-  // TODO: Support parameter binding
-  val foos = kapper.queryFor<Foo>(Query("SELECT * FROM foo WHERE bar LIKE 'ba%'"))
-  // foos = listOf(Foo("baz"))
+  kapper.queryFor<Book>(Query("SELECT * FROM books")) shouldBe
+    listOf(
+      Book("JRR Tolkien", "The Hobbit", 310),
+      Book("George Orwell", "1984", 328),
+    )
+
+  kapper.queryFor<Book>(Query("SELECT * FROM books WHERE number_of_pages > ?"), 320) shouldBe
+    listOf(Book("George Orwell", "1984", 328))
 }
 ```
