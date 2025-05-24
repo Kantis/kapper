@@ -2,6 +2,7 @@ package com.github.kantis.kapper.jdbc
 
 import com.github.kantis.kapper.Kapper
 import com.github.kantis.kapper.Query
+import com.github.kantis.kapper.execute
 import com.github.kantis.kapper.jdbc.h2.H2Helpers
 import com.github.kantis.kapper.queryFor
 import io.kotest.core.spec.style.FunSpec
@@ -20,11 +21,11 @@ class KapperJdbcTest : FunSpec(
          val dataSource = H2Helpers.prepareDatabase(
             "jdbc:h2:mem:test;IGNORECASE=true;MODE=MYSQL;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false;",
             "CREATE TABLE foo (bar VARCHAR(255))",
-            "INSERT INTO foo (bar) VALUES ('baz')",
-            "INSERT INTO foo (bar) VALUES ('qux')",
          )
 
          dataSource.transaction {
+            kapper.execute<Foo>(Query("INSERT INTO foo (bar) VALUES (?)"), "baz", "qux")
+
             kapper.queryFor<Foo>(Query("SELECT * FROM foo")) shouldBe
                listOf(
                   Foo("baz"),

@@ -4,6 +4,14 @@ interface DataSource {
    fun transaction(block: Transaction.() -> Unit)
 }
 
-fun interface Transaction {
-   fun execute(query: Query): List<Row>
+interface Transaction {
+   fun executeInTransaction(
+      query: Query,
+      vararg params: List<Any>,
+   )
+
+   fun query(
+      query: Query,
+      params: List<Any> = emptyList(),
+   ): List<Row>
 }
