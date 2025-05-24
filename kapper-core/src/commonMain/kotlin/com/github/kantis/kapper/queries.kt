@@ -5,9 +5,7 @@ import kotlin.jvm.JvmInline
 @JvmInline
 value class Query(val value: String)
 
-inline fun <reified T> Kapper.queryForSingleOrNull(query: Query): T? {
-   return null
-}
+inline fun <reified T> Kapper.queryForSingleOrNull(query: Query): T? = null
 
 context(Transaction)
 inline fun <reified T> Kapper.queryFor(query: Query): List<T> {

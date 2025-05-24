@@ -7,20 +7,6 @@ plugins {
 
 group = "io.kapper"
 
-kotlin {
-   compilerOptions { freeCompilerArgs.add("-Xcontext-receivers") }
-
-   sourceSets {
-      commonTest {
-         dependencies {
-            implementation(libs.kotest.runnerJunit5)
-            implementation(libs.kotest.assertionsCore)
-            implementation(libs.kotest.frameworkApi)
-         }
-      }
-   }
-}
-
 idea {
    module {
       isDownloadSources = true

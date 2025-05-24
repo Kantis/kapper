@@ -35,6 +35,7 @@ kotlin {
    targets.configureEach {
       compilations.configureEach {
          kotlinOptions {
+            freeCompilerArgs += "-Xcontext-receivers"
             apiVersion = kapperSettings.kotlinTarget.get()
             languageVersion = kapperSettings.kotlinTarget.get()
          }

@@ -1,0 +1,42 @@
+public abstract interface class com/github/kantis/kapper/DataSource {
+	public abstract fun transaction (Lkotlin/jvm/functions/Function1;)V
+}
+
+public abstract interface class com/github/kantis/kapper/KRowMapper {
+	public abstract fun mapRow (Ljava/util/Map;)Ljava/lang/Object;
+}
+
+public final class com/github/kantis/kapper/Kapper {
+	public static final field Companion Lcom/github/kantis/kapper/Kapper$Companion;
+	public fun <init> (Ljava/util/Map;)V
+	public final fun getRowMappers ()Ljava/util/Map;
+}
+
+public final class com/github/kantis/kapper/Kapper$Companion {
+	public final fun invoke (Lkotlin/jvm/functions/Function1;)Lcom/github/kantis/kapper/Kapper;
+}
+
+public final class com/github/kantis/kapper/KapperBuilder {
+	public fun <init> ()V
+	public final fun build ()Lcom/github/kantis/kapper/Kapper;
+	public final fun getRowMappers ()Ljava/util/Map;
+}
+
+public final class com/github/kantis/kapper/Query {
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lcom/github/kantis/kapper/Query;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public abstract interface class com/github/kantis/kapper/Transaction {
+	public abstract fun execute-yXdT1Jk (Ljava/lang/String;)Ljava/util/List;
+}
+

@@ -6,9 +6,7 @@ class Kapper(
    val rowMappers: MutableMap<KClass<*>, KRowMapper<*>>,
 ) {
    @Suppress("UNCHECKED_CAST")
-   inline fun <reified T> resolveMapper(): KRowMapper<T> {
-      return rowMappers[T::class] as KRowMapper<T>
-   }
+   inline fun <reified T> resolveMapper(): KRowMapper<T> = rowMappers[T::class] as KRowMapper<T>
 
    companion object {
       operator fun invoke(builder: KapperBuilder.() -> Unit) = KapperBuilder().apply(builder).build()
