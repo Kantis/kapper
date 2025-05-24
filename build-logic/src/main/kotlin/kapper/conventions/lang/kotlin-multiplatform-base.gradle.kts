@@ -9,7 +9,6 @@ import org.jetbrains.kotlin.gradle.testing.KotlinTaskTestRun
 plugins {
    id("kapper.conventions.base")
    kotlin("multiplatform")
-   kotlin("plugin.serialization")
    id("io.kotest.multiplatform")
    id("org.jlleitschuh.gradle.ktlint")
 }

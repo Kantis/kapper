@@ -6,6 +6,7 @@ includeBuild("build-logic")
 
 include(
    ":kapper-core",
+   ":kapper-jdbc",
 )
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")

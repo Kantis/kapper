@@ -1,7 +1,5 @@
 package kapper.conventions
 
-import org.gradle.kotlin.dsl.configure
-
 plugins {
    id("org.jetbrains.kotlinx.binary-compatibility-validator")
 }

@@ -1,0 +1,12 @@
+public final class com/github/kantis/kapper/jdbc/JdbcDataSource : com/github/kantis/kapper/DataSource {
+	public fun <init> (Ljava/sql/Connection;)V
+	public final fun getJdbcConnection ()Ljava/sql/Connection;
+	public fun transaction (Lkotlin/jvm/functions/Function1;)V
+}
+
+public final class com/github/kantis/kapper/jdbc/ResultSetReader {
+	public static final field INSTANCE Lcom/github/kantis/kapper/jdbc/ResultSetReader;
+	public final fun loadResultSet (Ljava/sql/ResultSet;)Ljava/util/List;
+	public final fun loadRow (Ljava/sql/ResultSet;)Ljava/util/Map;
+}
+

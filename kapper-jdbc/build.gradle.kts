@@ -1,7 +1,5 @@
 plugins {
-   id("kapper.conventions.lang.kotlin-multiplatform-js")
    id("kapper.conventions.lang.kotlin-multiplatform-jvm")
-   id("kapper.conventions.lang.kotlin-multiplatform-native")
    id("kapper.conventions.publishing.maven-publish")
 }
 
@@ -20,12 +18,14 @@ kotlin {
          jvmMain {
             dependencies {
                implementation(kotlin("reflect"))
+               implementation(projects.kapperCore)
             }
          }
 
          jvmTest {
             dependencies {
                implementation(libs.kotest.runnerJunit5)
+               implementation(libs.h2)
             }
          }
       }
