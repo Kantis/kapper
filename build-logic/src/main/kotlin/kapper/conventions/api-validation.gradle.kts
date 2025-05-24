@@ -1,4 +1,4 @@
-package ks3.conventions
+package kapper.conventions
 
 import org.gradle.kotlin.dsl.configure
 

@@ -1,13 +1,11 @@
-import dev.adamko.dokkatoo.dokka.plugins.DokkaHtmlPluginParameters
-
 plugins {
-   id("ks3.conventions.lang.kotlin-multiplatform-jvm")
-   id("ks3.conventions.lang.kotlin-multiplatform-native")
-   id("ks3.conventions.api-validation")
+   id("kapper.conventions.lang.kotlin-multiplatform-jvm")
+   id("kapper.conventions.lang.kotlin-multiplatform-native")
+   id("kapper.conventions.api-validation")
    idea
 }
 
-group = "io.ks3"
+group = "io.kapper"
 
 kotlin {
    compilerOptions { freeCompilerArgs.add("-Xcontext-receivers") }
@@ -30,7 +28,8 @@ idea {
       excludeDirs = excludeDirs +
          layout.files(
             ".idea",
-            "gradle/kotlin-js-store", // location of the lock file, overridden by Kotlin/JS convention
+            // location of the lock file, overridden by Kotlin/JS convention
+            "gradle/kotlin-js-store",
             "gradle/wrapper",
          )
 

@@ -1,4 +1,4 @@
-package ks3.conventions
+package kapper.conventions
 
 plugins {
    base
@@ -13,7 +13,7 @@ if (project != rootProject) {
    project.group = rootProject.group
 }
 
-extensions.create(Ks3BuildLogicSettings.EXTENSION_NAME, Ks3BuildLogicSettings::class)
+extensions.create(KapperBuildLogicSettings.EXTENSION_NAME, KapperBuildLogicSettings::class)
 
 //testlogger {
 //   showPassed = false

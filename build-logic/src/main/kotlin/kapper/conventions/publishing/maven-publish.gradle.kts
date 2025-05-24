@@ -1,6 +1,6 @@
-package ks3.conventions.publishing
+package kapper.conventions.publishing
 
-import ks3.conventions.Ks3BuildLogicSettings
+import kapper.conventions.KapperBuildLogicSettings
 import org.jetbrains.kotlin.gradle.plugin.KotlinMultiplatformPluginWrapper
 
 plugins {
@@ -9,7 +9,7 @@ plugins {
 }
 
 
-val ks3Settings = extensions.getByType<Ks3BuildLogicSettings>()
+val kapperSettings = extensions.getByType<KapperBuildLogicSettings>()
 
 
 val javadocJarStub by tasks.registering(Jar::class) {
@@ -22,7 +22,7 @@ val javadocJarStub by tasks.registering(Jar::class) {
 val ossrhUsername: Provider<String> = providers.gradleProperty("ossrhUsername")
 val ossrhPassword: Provider<String> = providers.gradleProperty("ossrhPassword")
 
-val isReleaseVersion = provider { version.toString().matches(Ks3BuildLogicSettings.releaseVersionRegex) }
+val isReleaseVersion = provider { version.toString().matches(KapperBuildLogicSettings.releaseVersionRegex) }
 
 val sonatypeReleaseUrl: Provider<String> = isReleaseVersion.map { isRelease ->
    if (isRelease) {
@@ -58,14 +58,14 @@ publishing {
          artifact(javadocJarStub)
 
          pom {
-            name.set("Ks3")
+            name.set("kapper")
             description.set("KotlinX Serialization standard serializers")
-            url.set("https://github.com/Kantis/ks3")
+            url.set("https://github.com/Kantis/kapper")
 
             scm {
-               connection.set("scm:git:https://github.com/Kantis/ks3/")
+               connection.set("scm:git:https://github.com/Kantis/kapper/")
                developerConnection.set("scm:git:https://github.com/Kantis/")
-               url.set("https://github.com/Kantis/ks3")
+               url.set("https://github.com/Kantis/kapper")
             }
 
             licenses {
@@ -119,7 +119,7 @@ tasks.withType<AbstractPublishToMaven>().configureEach {
 tasks.withType<AbstractPublishToMaven>().configureEach {
    // use vals - improves Gradle Config Cache compatibility
    val publicationName = publication.name
-   val enabledPublicationNamePrefixes = ks3Settings.enabledPublicationNamePrefixes
+   val enabledPublicationNamePrefixes = kapperSettings.enabledPublicationNamePrefixes
 
    val isPublicationEnabled = enabledPublicationNamePrefixes.map { prefixes ->
       prefixes.any { prefix -> publicationName.startsWith(prefix, ignoreCase = true) }

@@ -1,11 +1,11 @@
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
-import ks3.conventions.Ks3BuildLogicSettings
+import kapper.conventions.KapperBuildLogicSettings
 
 class IsReleaseVersionTest : FreeSpec (
    {
       "isReleaseVersion" - {
-         fun isReleaseVersion(version: String): Boolean = version.matches(Ks3BuildLogicSettings.releaseVersionRegex)
+         fun isReleaseVersion(version: String): Boolean = version.matches(KapperBuildLogicSettings.releaseVersionRegex)
 
          "should return true for a release version" {
             isReleaseVersion("1.2.3") shouldBe true

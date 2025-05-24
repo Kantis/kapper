@@ -1,16 +1,16 @@
-package ks3.conventions.lang
+package kapper.conventions.lang
 
-import ks3.conventions.Ks3BuildLogicSettings
+import kapper.conventions.KapperBuildLogicSettings
 
 // conventions for a Kotlin/Native subproject
 
 plugins {
-   id("ks3.conventions.lang.kotlin-multiplatform-base")
+   id("kapper.conventions.lang.kotlin-multiplatform-base")
 }
 
-val ks3Settings = extensions.getByType<Ks3BuildLogicSettings>()
+val kapperSettings = extensions.getByType<KapperBuildLogicSettings>()
 
-if (ks3Settings.enableKotlinNative.get()) {
+if (kapperSettings.enableKotlinNative.get()) {
    kotlin {
 
       // Native targets all extend commonMain and commonTest.

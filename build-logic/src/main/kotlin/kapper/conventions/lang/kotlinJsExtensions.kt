@@ -1,4 +1,4 @@
-package ks3.conventions.lang
+package kapper.conventions.lang
 
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure

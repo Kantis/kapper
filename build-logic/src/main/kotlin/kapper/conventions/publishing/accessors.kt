@@ -1,4 +1,4 @@
-package ks3.conventions.publishing
+package kapper.conventions.publishing
 
 import org.gradle.api.Project
 import org.gradle.api.publish.PublishingExtension

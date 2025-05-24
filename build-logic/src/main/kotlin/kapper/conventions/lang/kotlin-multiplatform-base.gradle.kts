@@ -1,13 +1,13 @@
-package ks3.conventions.lang
+package kapper.conventions.lang
 
-import ks3.conventions.Ks3BuildLogicSettings
+import kapper.conventions.KapperBuildLogicSettings
 import org.gradle.configurationcache.extensions.capitalized
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 import org.jetbrains.kotlin.gradle.targets.jvm.KotlinJvmTarget
 import org.jetbrains.kotlin.gradle.testing.KotlinTaskTestRun
 
 plugins {
-   id("ks3.conventions.base")
+   id("kapper.conventions.base")
    kotlin("multiplatform")
    kotlin("plugin.serialization")
    id("io.kotest.multiplatform")
@@ -18,16 +18,16 @@ plugins {
 // This plugin does not enable any Kotlin target. To enable a target in a subproject, prefer
 // applying specific Kotlin target convention plugins.
 
-val ks3Settings = extensions.getByType<Ks3BuildLogicSettings>()
+val kapperSettings = extensions.getByType<KapperBuildLogicSettings>()
 
 kotlin {
    jvmToolchain {
-      languageVersion.set(JavaLanguageVersion.of(ks3Settings.jvmTarget.get()))
+      languageVersion.set(JavaLanguageVersion.of(kapperSettings.jvmTarget.get()))
    }
 
    sourceSets {
       all {
-         languageSettings.optIn("io.ks3.core.Ks3Internal")
+         languageSettings.optIn("io.kapper.core.kapperInternal")
          languageSettings.optIn("kotlin.RequiresOptIn")
       }
    }
@@ -35,8 +35,8 @@ kotlin {
    targets.configureEach {
       compilations.configureEach {
          kotlinOptions {
-            apiVersion = ks3Settings.kotlinTarget.get()
-            languageVersion = ks3Settings.kotlinTarget.get()
+            apiVersion = kapperSettings.kotlinTarget.get()
+            languageVersion = kapperSettings.kotlinTarget.get()
          }
       }
    }
@@ -52,8 +52,8 @@ kotlin {
 
    sourceSets.configureEach {
       languageSettings {
-         languageVersion = ks3Settings.kotlinTarget.get()
-         apiVersion = ks3Settings.kotlinTarget.get()
+         languageVersion = kapperSettings.kotlinTarget.get()
+         apiVersion = kapperSettings.kotlinTarget.get()
          optIn("kotlin.RequiresOptIn")
       }
    }
