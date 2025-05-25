@@ -7,8 +7,8 @@ includeBuild("build-logic")
 include(
    ":mikrom-core",
    ":mikrom-compiler-plugin",
+   ":mikrom-compiler-plugin-test",
    ":mikrom-jdbc",
-   ":compiler-plugin-test",
 )
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
