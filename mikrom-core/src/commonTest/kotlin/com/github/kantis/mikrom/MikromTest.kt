@@ -4,9 +4,9 @@ import com.github.kantis.mikrom.util.InMemoryDataSource
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 
-data class Foo(val bar: String)
-
 class MikromTest : FunSpec({
+   data class Foo(val bar: String)
+
    test("Resolve mapper") {
       val mikrom =
          Mikrom {
