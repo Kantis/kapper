@@ -1,3 +1,3 @@
 package com.github.kantis.kapper
 
-typealias Row = Map<String, Any?>
+public typealias Row = Map<String, Any?>

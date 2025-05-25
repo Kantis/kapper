@@ -22,6 +22,14 @@ public final class com/github/kantis/kapper/KapperBuilder {
 	public final fun getRowMappers ()Ljava/util/Map;
 }
 
+public abstract interface annotation class com/github/kantis/kapper/ParameterMapper : java/lang/annotation/Annotation {
+}
+
+public final class com/github/kantis/kapper/QueriesKt {
+	public static final fun execute-ixD8Xpc (Lcom/github/kantis/kapper/Transaction;Lcom/github/kantis/kapper/Kapper;Ljava/lang/String;[Ljava/lang/Object;)V
+	public static final fun execute-ixD8Xpc (Lcom/github/kantis/kapper/Transaction;Lcom/github/kantis/kapper/Kapper;Ljava/lang/String;[Ljava/util/List;)V
+}
+
 public final class com/github/kantis/kapper/Query {
 	public static final synthetic fun box-impl (Ljava/lang/String;)Lcom/github/kantis/kapper/Query;
 	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
@@ -37,6 +45,11 @@ public final class com/github/kantis/kapper/Query {
 }
 
 public abstract interface class com/github/kantis/kapper/Transaction {
-	public abstract fun execute-yXdT1Jk (Ljava/lang/String;)Ljava/util/List;
+	public abstract fun executeInTransaction-u_OwPyU (Ljava/lang/String;[Ljava/util/List;)V
+	public abstract fun query-u_OwPyU (Ljava/lang/String;Ljava/util/List;)Ljava/util/List;
+}
+
+public final class com/github/kantis/kapper/Transaction$DefaultImpls {
+	public static synthetic fun query-u_OwPyU$default (Lcom/github/kantis/kapper/Transaction;Ljava/lang/String;Ljava/util/List;ILjava/lang/Object;)Ljava/util/List;
 }
 

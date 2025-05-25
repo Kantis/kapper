@@ -2,12 +2,12 @@ package com.github.kantis.kapper
 
 import kotlin.reflect.KClass
 
-class KapperBuilder {
-   val rowMappers: MutableMap<KClass<*>, KRowMapper<*>> = mutableMapOf()
+public class KapperBuilder {
+   public val rowMappers: MutableMap<KClass<*>, KRowMapper<*>> = mutableMapOf()
 
-   inline fun <reified T> registerMapper(mapper: KRowMapper<T>) {
+   public inline fun <reified T> registerMapper(mapper: KRowMapper<T>) {
       rowMappers.put(T::class, mapper)
    }
 
-   fun build(): Kapper = Kapper(rowMappers)
+   public fun build(): Kapper = Kapper(rowMappers)
 }

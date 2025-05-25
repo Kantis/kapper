@@ -1,7 +1,5 @@
 plugins {
-   id("kapper.conventions.lang.kotlin-multiplatform-jvm")
-   id("kapper.conventions.lang.kotlin-multiplatform-native")
-   id("kapper.conventions.api-validation")
+   id("kapper.conventions.base")
    idea
 }
 

@@ -1,11 +1,14 @@
 package com.github.kantis.kapper.jdbc
 
+import com.github.kantis.kapper.KapperInternal
 import com.github.kantis.kapper.Row
 import java.sql.ResultSet
 import java.sql.Types
 
-object ResultSetReader {
-   fun loadResultSet(resultSet: ResultSet): List<Row> {
+@KapperInternal
+public object ResultSetReader {
+   @KapperInternal
+   public fun loadResultSet(resultSet: ResultSet): List<Row> {
       val rows = mutableListOf<Row>()
       try {
          while (resultSet.next()) {
@@ -17,7 +20,7 @@ object ResultSetReader {
       return rows
    }
 
-   fun loadRow(resultSet: ResultSet): Row {
+   private fun loadRow(resultSet: ResultSet): Row {
       val row = mutableMapOf<String, Any?>()
       val metaData = resultSet.metaData
       for (i in 1..metaData.columnCount) {

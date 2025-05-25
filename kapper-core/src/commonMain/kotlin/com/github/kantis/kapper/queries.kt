@@ -3,24 +3,24 @@ package com.github.kantis.kapper
 import kotlin.jvm.JvmInline
 
 @JvmInline
-value class Query(val value: String)
+public value class Query(public val value: String)
 
-inline fun <reified T> Kapper.queryForSingleOrNull(query: Query): T? = null
+public inline fun <reified T> Kapper.queryForSingleOrNull(query: Query): T? = null
 
 context(Transaction)
-inline fun <reified T> Kapper.queryFor(query: Query): List<T> {
+public inline fun <reified T> Kapper.queryFor(query: Query): List<T> {
    val rowMapper = resolveMapper<T>()
    return query(query).map(rowMapper::mapRow)
 }
 
 context(Transaction)
-inline fun <reified T> Kapper.queryFor(
+public inline fun <reified T> Kapper.queryFor(
    query: Query,
    param: Any,
 ): List<T> = queryFor(query, listOf(param))
 
 context(Transaction)
-inline fun <reified T> Kapper.queryFor(
+public inline fun <reified T> Kapper.queryFor(
    query: Query,
    params: List<Any>,
 ): List<T> {
@@ -29,7 +29,7 @@ inline fun <reified T> Kapper.queryFor(
 }
 
 context(Transaction)
-inline fun <reified T> Kapper.execute(
+public inline fun <reified T> Kapper.execute(
    query: Query,
    params: List<Any>,
 ) {
@@ -37,7 +37,7 @@ inline fun <reified T> Kapper.execute(
 }
 
 context(Transaction)
-inline fun Kapper.execute(
+public inline fun Kapper.execute(
    query: Query,
    vararg params: List<Any>,
 ) {
@@ -45,7 +45,7 @@ inline fun Kapper.execute(
 }
 
 context(Transaction)
-inline fun Kapper.execute(
+public inline fun Kapper.execute(
    query: Query,
    vararg params: Any,
 ) {

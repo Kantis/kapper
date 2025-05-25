@@ -4,6 +4,12 @@ public final class com/github/kantis/kapper/jdbc/JdbcDataSource : com/github/kan
 	public fun transaction (Lkotlin/jvm/functions/Function1;)V
 }
 
+public final class com/github/kantis/kapper/jdbc/JdbcTransaction : com/github/kantis/kapper/Transaction {
+	public fun <init> (Ljava/sql/Connection;)V
+	public fun executeInTransaction-u_OwPyU (Ljava/lang/String;[Ljava/util/List;)V
+	public fun query-u_OwPyU (Ljava/lang/String;Ljava/util/List;)Ljava/util/List;
+}
+
 public final class com/github/kantis/kapper/jdbc/ResultSetReader {
 	public static final field INSTANCE Lcom/github/kantis/kapper/jdbc/ResultSetReader;
 	public final fun loadResultSet (Ljava/sql/ResultSet;)Ljava/util/List;

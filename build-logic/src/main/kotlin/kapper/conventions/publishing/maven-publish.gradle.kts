@@ -1,16 +1,13 @@
 package kapper.conventions.publishing
 
 import kapper.conventions.KapperBuildLogicSettings
-import org.jetbrains.kotlin.gradle.plugin.KotlinMultiplatformPluginWrapper
 
 plugins {
    signing
    `maven-publish`
 }
 
-
 val kapperSettings = extensions.getByType<KapperBuildLogicSettings>()
-
 
 val javadocJarStub by tasks.registering(Jar::class) {
    group = JavaBasePlugin.DOCUMENTATION_GROUP
@@ -111,7 +108,7 @@ tasks.withType<AbstractPublishToMaven>().configureEach {
 
    doLast {
       if (publicationGAV != null) {
-         logger.lifecycle("[task: ${path}] $publicationGAV")
+         logger.lifecycle("[task: $path] $publicationGAV")
       }
    }
 }
@@ -138,6 +135,6 @@ tasks.withType<AbstractPublishToMaven>().configureEach {
 }
 
 // Kotlin Multiplatform specific publishing configuration
-plugins.withType<KotlinMultiplatformPluginWrapper>().configureEach {
-   // nothing yet!
-}
+// plugins.withType<KotlinMultiplatformPluginWrapper>().configureEach {
+//   // nothing yet!
+// }

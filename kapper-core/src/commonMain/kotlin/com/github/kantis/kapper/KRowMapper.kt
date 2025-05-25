@@ -1,5 +1,5 @@
 package com.github.kantis.kapper
 
-fun interface KRowMapper<out T> {
-   fun mapRow(row: Row): T
+public fun interface KRowMapper<out T> {
+   public fun mapRow(row: Row): T
 }

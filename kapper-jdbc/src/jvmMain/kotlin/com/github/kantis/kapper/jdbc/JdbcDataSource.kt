@@ -7,7 +7,7 @@ import com.github.kantis.kapper.Transaction
 import java.sql.Connection
 import java.sql.PreparedStatement
 
-class JdbcTransaction(private val connection: Connection) : Transaction {
+public class JdbcTransaction(private val connection: Connection) : Transaction {
    override fun executeInTransaction(
       query: Query,
       vararg parameterLists: List<Any>,
@@ -53,7 +53,7 @@ class JdbcTransaction(private val connection: Connection) : Transaction {
    }
 }
 
-class JdbcDataSource(val jdbcConnection: Connection) : DataSource {
+public class JdbcDataSource(private val jdbcConnection: Connection) : DataSource {
    override fun transaction(block: Transaction.() -> Unit) {
       jdbcConnection.beginRequest()
       try {

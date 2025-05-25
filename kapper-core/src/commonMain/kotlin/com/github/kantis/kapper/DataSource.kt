@@ -1,16 +1,16 @@
 package com.github.kantis.kapper
 
-interface DataSource {
-   fun transaction(block: Transaction.() -> Unit)
+public interface DataSource {
+   public fun transaction(block: Transaction.() -> Unit)
 }
 
-interface Transaction {
-   fun executeInTransaction(
+public interface Transaction {
+   public fun executeInTransaction(
       query: Query,
       vararg params: List<Any>,
    )
 
-   fun query(
+   public fun query(
       query: Query,
       params: List<Any> = emptyList(),
    ): List<Row>

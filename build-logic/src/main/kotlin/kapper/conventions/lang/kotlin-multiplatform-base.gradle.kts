@@ -20,6 +20,7 @@ plugins {
 val kapperSettings = extensions.getByType<KapperBuildLogicSettings>()
 
 kotlin {
+   explicitApi()
    jvmToolchain {
       languageVersion.set(JavaLanguageVersion.of(kapperSettings.jvmTarget.get()))
    }
