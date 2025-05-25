@@ -1,4 +1,4 @@
-package kapper.conventions.publishing
+package mikrom.conventions.publishing
 
 import org.gradle.api.Project
 import org.gradle.api.publish.PublishingExtension
@@ -10,6 +10,9 @@ import org.gradle.plugins.signing.SigningExtension
 // These aren't necessary for building, only so auto-complete works.
 
 internal val Project.signing get() = extensions.getByType<SigningExtension>()
+
 internal fun Project.signing(action: SigningExtension.() -> Unit) = extensions.configure(action)
+
 internal val Project.publishing get() = extensions.getByType<PublishingExtension>()
+
 internal fun Project.publishing(action: PublishingExtension.() -> Unit) = extensions.configure(action)

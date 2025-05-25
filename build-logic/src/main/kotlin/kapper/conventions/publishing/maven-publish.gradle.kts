@@ -1,13 +1,13 @@
-package kapper.conventions.publishing
+package mikrom.conventions.publishing
 
-import kapper.conventions.KapperBuildLogicSettings
+import mikrom.conventions.MikromBuildLogicSettings
 
 plugins {
    signing
    `maven-publish`
 }
 
-val kapperSettings = extensions.getByType<KapperBuildLogicSettings>()
+val mikromSettings = extensions.getByType<MikromBuildLogicSettings>()
 
 val javadocJarStub by tasks.registering(Jar::class) {
    group = JavaBasePlugin.DOCUMENTATION_GROUP
@@ -19,7 +19,7 @@ val javadocJarStub by tasks.registering(Jar::class) {
 val ossrhUsername: Provider<String> = providers.gradleProperty("ossrhUsername")
 val ossrhPassword: Provider<String> = providers.gradleProperty("ossrhPassword")
 
-val isReleaseVersion = provider { version.toString().matches(KapperBuildLogicSettings.releaseVersionRegex) }
+val isReleaseVersion = provider { version.toString().matches(MikromBuildLogicSettings.releaseVersionRegex) }
 
 val sonatypeReleaseUrl: Provider<String> = isReleaseVersion.map { isRelease ->
    if (isRelease) {
@@ -55,14 +55,14 @@ publishing {
          artifact(javadocJarStub)
 
          pom {
-            name.set("kapper")
+            name.set("mikrom")
             description.set("KotlinX Serialization standard serializers")
-            url.set("https://github.com/Kantis/kapper")
+            url.set("https://github.com/Kantis/mikrom")
 
             scm {
-               connection.set("scm:git:https://github.com/Kantis/kapper/")
+               connection.set("scm:git:https://github.com/Kantis/mikrom/")
                developerConnection.set("scm:git:https://github.com/Kantis/")
-               url.set("https://github.com/Kantis/kapper")
+               url.set("https://github.com/Kantis/mikrom")
             }
 
             licenses {
@@ -116,7 +116,7 @@ tasks.withType<AbstractPublishToMaven>().configureEach {
 tasks.withType<AbstractPublishToMaven>().configureEach {
    // use vals - improves Gradle Config Cache compatibility
    val publicationName = publication.name
-   val enabledPublicationNamePrefixes = kapperSettings.enabledPublicationNamePrefixes
+   val enabledPublicationNamePrefixes = mikromSettings.enabledPublicationNamePrefixes
 
    val isPublicationEnabled = enabledPublicationNamePrefixes.map { prefixes ->
       prefixes.any { prefix -> publicationName.startsWith(prefix, ignoreCase = true) }

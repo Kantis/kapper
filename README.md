@@ -1,5 +1,5 @@
-## What is Kapper?
-Kapper is inspired by [Dapper](https://github.com/DapperLib/Dapper), a popular micro ORM for .NET.
+## What is Mikrom?
+Mikrom is inspired by [Dapper](https://github.com/DapperLib/Dapper), a popular micro ORM for .NET.
 
 ## Philosophy
 - No automated tracking of changes
@@ -10,14 +10,14 @@ Kapper is inspired by [Dapper](https://github.com/DapperLib/Dapper), a popular m
   - JS and Native variants not currently planned, raise an issue if you want them.
 
 I want to provide a simple way of working with databases, that does _not_ involve automatic change tracking in "entities".
-I want explicit control over what is being updated, and how. With Kapper, you are in control and can write SQL that fits your exact needs.
+I want explicit control over what is being updated, and how. With Mikrom, you are in control and can write SQL that fits your exact needs.
 
 Command-query separation becomes natural, since there is no relationship between reading and writing data tied to some "entity" class.
 
 ## Usage
 
 ### JDBC
-Create a JDBC connection and construct a `Kapper` instance:
+Create a JDBC connection and construct a `Mikrom` instance:
 
 ```kotlin
 val dbConnection = DriverManager.getConnection("jdbc:your_database_url")
@@ -25,7 +25,7 @@ val jdbcDataSource = JdbcDataSource(dbConnection)
 
 data class Book(val author: String, val title: String, val numberOfPages: Int)
 
-val kapper = Kapper {
+val mikrom = Mikrom {
   registerMapper { row ->
     Book(
       author = row["author"] as String,
@@ -37,19 +37,19 @@ val kapper = Kapper {
 
 // All queries must be executed within a transaction scope.
 dataSource.transaction {
-  kapper.execute(
+  mikrom.execute(
     Query("INSERT INTO books (author, title, number_of_pages) VALUES (?, ?, ?)"),
     listOf("JRR Tolkien", "The Hobbit", 310),
     listOf("George Orwell", "1984", 328),
   )
 
-  kapper.queryFor<Book>(Query("SELECT * FROM books")) shouldBe
+  mikrom.queryFor<Book>(Query("SELECT * FROM books")) shouldBe
     listOf(
       Book("JRR Tolkien", "The Hobbit", 310),
       Book("George Orwell", "1984", 328),
     )
 
-  kapper.queryFor<Book>(Query("SELECT * FROM books WHERE number_of_pages > ?"), 320) shouldBe
+  mikrom.queryFor<Book>(Query("SELECT * FROM books WHERE number_of_pages > ?"), 320) shouldBe
     listOf(Book("George Orwell", "1984", 328))
 }
 ```

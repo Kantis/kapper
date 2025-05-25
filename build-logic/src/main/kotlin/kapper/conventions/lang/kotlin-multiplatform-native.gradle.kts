@@ -1,16 +1,16 @@
-package kapper.conventions.lang
+package mikrom.conventions.lang
 
-import kapper.conventions.KapperBuildLogicSettings
+import mikrom.conventions.MikromBuildLogicSettings
 
 // conventions for a Kotlin/Native subproject
 
 plugins {
-   id("kapper.conventions.lang.kotlin-multiplatform-base")
+   id("mikrom.conventions.lang.kotlin-multiplatform-base")
 }
 
-val kapperSettings = extensions.getByType<KapperBuildLogicSettings>()
+val mikromSettings = extensions.getByType<MikromBuildLogicSettings>()
 
-if (kapperSettings.enableKotlinNative.get()) {
+if (mikromSettings.enableKotlinNative.get()) {
    kotlin {
 
       // Native targets all extend commonMain and commonTest.

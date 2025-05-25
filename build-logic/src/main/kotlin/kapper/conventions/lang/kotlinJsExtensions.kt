@@ -1,4 +1,4 @@
-package kapper.conventions.lang
+package mikrom.conventions.lang
 
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure

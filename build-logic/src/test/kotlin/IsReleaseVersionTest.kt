@@ -1,11 +1,11 @@
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
-import kapper.conventions.KapperBuildLogicSettings
+import mikrom.conventions.MikromBuildLogicSettings
 
-class IsReleaseVersionTest : FreeSpec (
+class IsReleaseVersionTest : FreeSpec(
    {
       "isReleaseVersion" - {
-         fun isReleaseVersion(version: String): Boolean = version.matches(KapperBuildLogicSettings.releaseVersionRegex)
+         fun isReleaseVersion(version: String): Boolean = version.matches(MikromBuildLogicSettings.releaseVersionRegex)
 
          "should return true for a release version" {
             isReleaseVersion("1.2.3") shouldBe true
@@ -23,5 +23,5 @@ class IsReleaseVersionTest : FreeSpec (
             isReleaseVersion("1.2.3-alpha1") shouldBe false
          }
       }
-   }
+   },
 )

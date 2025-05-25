@@ -1,9 +1,10 @@
 plugins {
-   id("kapper.conventions.base")
+   id("mikrom.conventions.base")
+   id("mikrom.conventions.api-validation")
    idea
 }
 
-group = "io.kapper"
+group = "io.mikrom"
 
 idea {
    module {

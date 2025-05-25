@@ -1,13 +1,13 @@
-package kapper.conventions.lang
+package mikrom.conventions.lang
 
-import kapper.conventions.KapperBuildLogicSettings
+import mikrom.conventions.MikromBuildLogicSettings
 import org.gradle.configurationcache.extensions.capitalized
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 import org.jetbrains.kotlin.gradle.targets.jvm.KotlinJvmTarget
 import org.jetbrains.kotlin.gradle.testing.KotlinTaskTestRun
 
 plugins {
-   id("kapper.conventions.base")
+   id("mikrom.conventions.base")
    kotlin("multiplatform")
    id("io.kotest.multiplatform")
    id("org.jlleitschuh.gradle.ktlint")
@@ -17,17 +17,17 @@ plugins {
 // This plugin does not enable any Kotlin target. To enable a target in a subproject, prefer
 // applying specific Kotlin target convention plugins.
 
-val kapperSettings = extensions.getByType<KapperBuildLogicSettings>()
+val mikromSettings = extensions.getByType<MikromBuildLogicSettings>()
 
 kotlin {
    explicitApi()
    jvmToolchain {
-      languageVersion.set(JavaLanguageVersion.of(kapperSettings.jvmTarget.get()))
+      languageVersion.set(JavaLanguageVersion.of(mikromSettings.jvmTarget.get()))
    }
 
    sourceSets {
       all {
-         languageSettings.optIn("io.kapper.core.kapperInternal")
+         languageSettings.optIn("com.github.kantis.mikrom.MikromInternal")
          languageSettings.optIn("kotlin.RequiresOptIn")
       }
    }
@@ -36,8 +36,8 @@ kotlin {
       compilations.configureEach {
          kotlinOptions {
             freeCompilerArgs += "-Xcontext-receivers"
-            apiVersion = kapperSettings.kotlinTarget.get()
-            languageVersion = kapperSettings.kotlinTarget.get()
+            apiVersion = mikromSettings.kotlinTarget.get()
+            languageVersion = mikromSettings.kotlinTarget.get()
          }
       }
    }
@@ -53,8 +53,8 @@ kotlin {
 
    sourceSets.configureEach {
       languageSettings {
-         languageVersion = kapperSettings.kotlinTarget.get()
-         apiVersion = kapperSettings.kotlinTarget.get()
+         languageVersion = mikromSettings.kotlinTarget.get()
+         apiVersion = mikromSettings.kotlinTarget.get()
          optIn("kotlin.RequiresOptIn")
       }
    }

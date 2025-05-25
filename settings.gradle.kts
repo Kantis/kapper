@@ -1,12 +1,14 @@
-rootProject.name = "kapper"
+rootProject.name = "mikrom"
 
 apply(from = "build-logic/repositories.gradle.kts")
 
 includeBuild("build-logic")
 
 include(
-   ":kapper-core",
-   ":kapper-jdbc",
+   ":mikrom-core",
+   ":mikrom-compiler-plugin",
+   ":mikrom-jdbc",
+   ":compiler-plugin-test",
 )
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")

@@ -1,14 +1,14 @@
-package kapper.conventions.lang
+package mikrom.conventions.lang
 
-import kapper.conventions.KapperBuildLogicSettings
+import mikrom.conventions.MikromBuildLogicSettings
 
 plugins {
-   id("kapper.conventions.lang.kotlin-multiplatform-base")
+   id("mikrom.conventions.lang.kotlin-multiplatform-base")
 }
 
-val kapperSettings = extensions.getByType<KapperBuildLogicSettings>()
+val mikromSettings = extensions.getByType<MikromBuildLogicSettings>()
 
-if (kapperSettings.enableKotlinJs.get()) {
+if (mikromSettings.enableKotlinJs.get()) {
    kotlin {
       js(IR) {
          browser()
