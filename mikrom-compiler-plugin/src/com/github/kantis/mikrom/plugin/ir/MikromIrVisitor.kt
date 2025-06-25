@@ -3,15 +3,18 @@ package com.github.kantis.mikrom.plugin.ir
 import com.github.kantis.mikrom.plugin.MikromGenerateRowMapperKey
 import org.jetbrains.kotlin.backend.common.extensions.IrPluginContext
 import org.jetbrains.kotlin.backend.common.lower.DeclarationIrBuilder
+import org.jetbrains.kotlin.backend.common.lower.irThrow
 import org.jetbrains.kotlin.ir.IrElement
 import org.jetbrains.kotlin.ir.builders.IrBlockBodyBuilder
 import org.jetbrains.kotlin.ir.builders.IrBuilderWithScope
+import org.jetbrains.kotlin.ir.builders.irBlock
 import org.jetbrains.kotlin.ir.builders.irBlockBody
 import org.jetbrains.kotlin.ir.builders.irCall
 import org.jetbrains.kotlin.ir.builders.irDelegatingConstructorCall
 import org.jetbrains.kotlin.ir.builders.irGet
 import org.jetbrains.kotlin.ir.builders.irReturn
 import org.jetbrains.kotlin.ir.builders.irString
+import org.jetbrains.kotlin.ir.builders.irTemporary
 import org.jetbrains.kotlin.ir.declarations.IrClass
 import org.jetbrains.kotlin.ir.declarations.IrConstructor
 import org.jetbrains.kotlin.ir.declarations.IrDeclaration
@@ -19,7 +22,6 @@ import org.jetbrains.kotlin.ir.declarations.IrDeclarationOrigin
 import org.jetbrains.kotlin.ir.declarations.IrDeclarationWithName
 import org.jetbrains.kotlin.ir.declarations.IrFile
 import org.jetbrains.kotlin.ir.declarations.IrModuleFragment
-import org.jetbrains.kotlin.ir.declarations.IrProperty
 import org.jetbrains.kotlin.ir.declarations.IrSimpleFunction
 import org.jetbrains.kotlin.ir.declarations.IrValueParameter
 import org.jetbrains.kotlin.ir.declarations.IrVariable
@@ -30,12 +32,15 @@ import org.jetbrains.kotlin.ir.expressions.IrGetValue
 import org.jetbrains.kotlin.ir.expressions.impl.IrInstanceInitializerCallImpl
 import org.jetbrains.kotlin.ir.types.classifierOrNull
 import org.jetbrains.kotlin.ir.types.makeNullable
+import org.jetbrains.kotlin.ir.util.deepCopyWithoutPatchingParents
+import org.jetbrains.kotlin.ir.util.functions
 import org.jetbrains.kotlin.ir.util.primaryConstructor
 import org.jetbrains.kotlin.ir.visitors.IrElementTransformerVoid
 import org.jetbrains.kotlin.ir.visitors.IrVisitorVoid
 import org.jetbrains.kotlin.ir.visitors.acceptChildrenVoid
 import org.jetbrains.kotlin.name.ClassId
 import org.jetbrains.kotlin.name.FqName
+import org.jetbrains.kotlin.name.Name
 import kotlin.collections.forEachIndexed
 
 class MikromIrVisitor(
@@ -110,20 +115,15 @@ class MikromIrVisitor(
    }
 
    private fun generateMapRowFunction(function: IrSimpleFunction): IrBody? {
-      val rowMapperClass = function.parent
-         as? IrClass ?: return null
-      val irClass = function.returnType.classifierOrNull?.owner
-         as? IrClass ?: return null
-      val primaryConstructor = irClass.primaryConstructor
-         ?: return null
-
+//      val rowMapperClass = function.parent as? IrClass ?: return null
+      val mappedType = function.returnType.classifierOrNull?.owner as? IrClass ?: return null
+      val primaryConstructor = mappedType.primaryConstructor ?: return null
       val irBuilder = DeclarationIrBuilder(context, function.symbol)
+
       return irBuilder.irBlockBody {
-         val arguments = generateConstructorArguments(
-            constructorParameters = primaryConstructor.valueParameters,
-            builderProperties = rowMapperClass.declarations.filterIsInstance<IrProperty>(),
-            dispatchReceiverParameter = function.dispatchReceiverParameter!!,
-         )
+         // Map<String, Any>
+         val row = function.parameters[1] // first will be the "this" reference..
+         val arguments = generateConstructorArguments(primaryConstructor.valueParameters, row)
 
          val constructorCall = irCall(primaryConstructor).apply {
             arguments.forEachIndexed { index, variable ->
@@ -137,23 +137,30 @@ class MikromIrVisitor(
 
    private fun IrBlockBodyBuilder.generateConstructorArguments(
       constructorParameters: List<IrValueParameter>,
-      builderProperties: List<IrProperty>,
-      dispatchReceiverParameter: IrValueParameter,
+      row: IrValueParameter,
    ): List<IrVariable> {
       val variables = mutableListOf<IrVariable>()
 
-      // Transformer to substitute references to previous constructor parameters
-      // with references to previous local variables.
-      val transformer = object : IrElementTransformerVoid() {
-         override fun visitGetValue(expression: IrGetValue): IrExpression {
-            val index = constructorParameters
-               .indexOfFirst { it.symbol == expression.symbol }
+      for (valueParameter in constructorParameters) {
+         variables += irTemporary(
+            nameHint = valueParameter.name.asString(),
+            value = irBlock {
+               val mapRef = irGet(row)
+               val keyLiteral = irString(valueParameter.name.asString())
 
-            return when {
-               index != -1 -> irGet(variables[index])
-               else -> super.visitGetValue(expression)
-            }
-         }
+               // Find the Map.get function
+               val mapClass = context.irBuiltIns.mapClass
+               val getFunction = mapClass.functions.single {
+                  it.owner.name == Name.identifier("get") &&
+                     it.owner.valueParameters.size == 1
+               }
+
+               +irCall(getFunction).apply {
+                  dispatchReceiver = mapRef
+                  putValueArgument(0, keyLiteral)
+               }
+            },
+         )
       }
 
       return variables

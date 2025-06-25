@@ -3,6 +3,7 @@ package com.github.kantis.mikrom.plugin.fir
 import com.github.kantis.mikrom.plugin.MikromGenerateRowMapperClassKey
 import com.github.kantis.mikrom.plugin.MikromGenerateRowMapperKey
 import org.jetbrains.kotlin.descriptors.ClassKind
+import org.jetbrains.kotlin.descriptors.Visibilities
 import org.jetbrains.kotlin.fir.FirSession
 import org.jetbrains.kotlin.fir.declarations.FirDeclarationOrigin
 import org.jetbrains.kotlin.fir.declarations.utils.visibility
@@ -107,11 +108,14 @@ public class MikromFirDeclarationGenerationExtension(
       val key = (rowMapperClassSymbol.origin as? FirDeclarationOrigin.Plugin)?.key
       if (key !is MikromGenerateRowMapperClassKey) return emptyList()
 
+      // TODO: Should probably call super(), to be compliant with a normal Object..
       val constructor = createConstructor(
          owner = rowMapperClassSymbol,
          key = MikromGenerateRowMapperKey,
          isPrimary = true,
-      )
+      ) {
+         visibility = Visibilities.Private
+      }
 
       return listOf(constructor.symbol)
    }

@@ -8,7 +8,7 @@ import kotlin.test.*
 fun box(): String {
    val person = Person.RowMapper.mapRow(mapOf(
       "name" to "Brian",
-      "nickName" to "bnorm",
+      "nickname" to "bnorm",
       "age" to -1,
    ))
 
