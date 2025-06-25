@@ -9,6 +9,7 @@ include(
    ":mikrom-compiler-plugin",
    ":mikrom-compiler-plugin-test",
    ":mikrom-jdbc",
+   ":example",
 )
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")

@@ -1,4 +1,4 @@
-package fir
+package com.github.kantis.mikrom.plugin.fir
 
 import org.jetbrains.kotlin.fir.extensions.FirExtensionRegistrar
 

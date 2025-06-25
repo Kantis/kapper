@@ -2,7 +2,9 @@ package mikrom.conventions.lang
 
 import mikrom.conventions.MikromBuildLogicSettings
 import org.gradle.configurationcache.extensions.capitalized
+import org.gradle.kotlin.dsl.support.kotlinCompilerOptions
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
+import org.jetbrains.kotlin.gradle.plugin.KotlinTarget
 import org.jetbrains.kotlin.gradle.targets.jvm.KotlinJvmTarget
 import org.jetbrains.kotlin.gradle.testing.KotlinTaskTestRun
 
@@ -32,14 +34,8 @@ kotlin {
       }
    }
 
-   targets.configureEach {
-      compilations.configureEach {
-         kotlinOptions {
-            freeCompilerArgs += "-Xcontext-receivers"
-            apiVersion = mikromSettings.kotlinTarget.get()
-            languageVersion = mikromSettings.kotlinTarget.get()
-         }
-      }
+   compilerOptions {
+      freeCompilerArgs.add("-Xcontext-receivers")
    }
 
    // configure all Kotlin/JVM Tests to use JUnit

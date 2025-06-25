@@ -13,3 +13,6 @@ Check out the following repositories for inspiration:
 - https://github.com/cashapp/burst
 - https://github.com/drewhamilton/poko
 - https://github.com/ZacSweers/metro
+
+## Test setup
+- Copied from [bnorm/buildable](https://github.com/bnorm/buildable) for now

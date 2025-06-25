@@ -56,6 +56,9 @@ public final class com/github/kantis/mikrom/datasource/Transaction$DefaultImpls 
 public abstract interface annotation class com/github/kantis/mikrom/generator/AutoMapper : java/lang/annotation/Annotation {
 }
 
+public abstract interface annotation class com/github/kantis/mikrom/generator/GenerateRowMapper : java/lang/annotation/Annotation {
+}
+
 public abstract interface annotation class com/github/kantis/mikrom/generator/ParameterMapper : java/lang/annotation/Annotation {
 }
 

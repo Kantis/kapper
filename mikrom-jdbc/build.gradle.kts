@@ -24,11 +24,15 @@ kotlin {
 
          jvmTest {
             dependencies {
-               implementation(projects.mikromCompilerPlugin)
                implementation(libs.kotest.runnerJunit5)
                implementation(libs.h2)
             }
          }
       }
    }
+}
+
+
+dependencies {
+   kotlinCompilerPluginClasspath(projects.mikromCompilerPlugin)
 }
