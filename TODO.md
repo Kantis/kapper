@@ -5,6 +5,7 @@
 - Add `ParameterMapper` (see below)
   - Compiler plugin support for generation of parameter mappers
 - Provide a check for `@RowMapped`-annotated class, if it already contains a `RowMapper` object (would cause compiler errors if we try to generate another)
+- Generate informative errors when auto-generated RowMapper tries to bind a property of wrong type to the constructor
 
 ## Support KotlinX-serialization style registration of Row/Parameter mappers
 ```kotlin

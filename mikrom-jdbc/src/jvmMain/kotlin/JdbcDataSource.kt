@@ -4,6 +4,8 @@ import com.github.kantis.mikrom.Query
 import com.github.kantis.mikrom.Row
 import com.github.kantis.mikrom.datasource.DataSource
 import com.github.kantis.mikrom.datasource.Transaction
+import com.github.kantis.mikrom.datasource.TransactionResult
+import org.slf4j.LoggerFactory
 import java.sql.Connection
 import java.sql.PreparedStatement
 
@@ -54,18 +56,33 @@ public class JdbcTransaction(private val connection: Connection) : Transaction {
 }
 
 public class JdbcDataSource(private val jdbcConnection: Connection) : DataSource {
-   override fun transaction(block: Transaction.() -> Unit) {
+   override fun transaction(block: Transaction.() -> TransactionResult) {
       jdbcConnection.beginRequest()
       try {
          val transaction = JdbcTransaction(jdbcConnection)
 
-         transaction.block()
-         jdbcConnection.commit()
+         when (transaction.block()) {
+            TransactionResult.Commit -> {
+               logger.debug("Committing transaction, since transaction resulted in {}", TransactionResult.Commit)
+               jdbcConnection.commit()
+            }
+
+            TransactionResult.Rollback -> {
+               logger.debug("Rolling back transaction, since transaction resulted in {}", TransactionResult.Rollback)
+               jdbcConnection.rollback()
+            }
+         }
       } catch (e: Exception) {
+         logger.warn("Rolling back transaction, since transaction resulted in unhandled exception: {}", e.message)
          jdbcConnection.rollback()
          throw e
       } finally {
+         logger.debug("Closing JDBC request")
          jdbcConnection.endRequest()
       }
+   }
+
+   public companion object {
+      private val logger = LoggerFactory.getLogger(JdbcDataSource::class.java)
    }
 }

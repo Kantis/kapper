@@ -14,6 +14,9 @@ kotlinBinaryCompatibilityValidator = "0.17.0"
 
 [libraries]
 
+h2 = { module = "com.h2database:h2", version = "2.3.232" }
+slf4j-api = { module = "org.slf4j:slf4j-api", version = "2.0.9" }
+
 ## Kotest ##
 kotest-assertionsCore = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
 kotest-assertionsJson = { module = "io.kotest:kotest-assertions-json", version.ref = "kotest" }
@@ -32,9 +35,6 @@ kotestPlugin-multiplatform = { module = "io.kotest:kotest-framework-multiplatfor
 ## Dokka plugins ##
 dokka-allModulesPage = { module = "org.jetbrains.dokka:all-modules-page-plugin", version.ref = "dokka" }
 dokka-templating = { module = "org.jetbrains.dokka:templating-plugin", version.ref = "dokka" }
-
-# H2
-h2 = { module = "com.h2database:h2", version = "2.3.232" }
 
 ### Gradle plugins ###
 # Maven coordinates of Gradle plugins. Used in ./build-logic/build.gradle.kts.

@@ -19,6 +19,7 @@ kotlin {
             dependencies {
                implementation(kotlin("reflect"))
                implementation(projects.mikromCore)
+               implementation(libs.slf4j.api)
             }
          }
 
@@ -31,7 +32,6 @@ kotlin {
       }
    }
 }
-
 
 dependencies {
    kotlinCompilerPluginClasspath(projects.mikromCompilerPlugin)

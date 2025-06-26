@@ -53,12 +53,17 @@ public final class com/github/kantis/mikrom/datasource/Transaction$DefaultImpls 
 	public static synthetic fun query-tOu8PdM$default (Lcom/github/kantis/mikrom/datasource/Transaction;Ljava/lang/String;Ljava/util/List;ILjava/lang/Object;)Ljava/util/List;
 }
 
-public abstract interface annotation class com/github/kantis/mikrom/generator/AutoMapper : java/lang/annotation/Annotation {
+public final class com/github/kantis/mikrom/datasource/TransactionResult : java/lang/Enum {
+	public static final field Commit Lcom/github/kantis/mikrom/datasource/TransactionResult;
+	public static final field Rollback Lcom/github/kantis/mikrom/datasource/TransactionResult;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/github/kantis/mikrom/datasource/TransactionResult;
+	public static fun values ()[Lcom/github/kantis/mikrom/datasource/TransactionResult;
 }
 
-public abstract interface annotation class com/github/kantis/mikrom/generator/GenerateRowMapper : java/lang/annotation/Annotation {
+public abstract interface annotation class com/github/kantis/mikrom/generator/ParameterMapped : java/lang/annotation/Annotation {
 }
 
-public abstract interface annotation class com/github/kantis/mikrom/generator/ParameterMapper : java/lang/annotation/Annotation {
+public abstract interface annotation class com/github/kantis/mikrom/generator/RowMapped : java/lang/annotation/Annotation {
 }
 

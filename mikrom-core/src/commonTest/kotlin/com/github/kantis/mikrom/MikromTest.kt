@@ -1,5 +1,6 @@
 package com.github.kantis.mikrom
 
+import com.github.kantis.mikrom.datasource.TransactionResult
 import com.github.kantis.mikrom.util.InMemoryDataSource
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
@@ -38,6 +39,8 @@ class MikromTest : FunSpec({
                Foo("baz"),
                Foo("qux"),
             )
+
+         TransactionResult.Commit
       }
    }
 })
