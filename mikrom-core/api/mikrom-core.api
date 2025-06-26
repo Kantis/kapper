@@ -1,7 +1,3 @@
-public abstract interface class com/github/kantis/mikrom/KRowMapper {
-	public abstract fun mapRow (Ljava/util/Map;)Ljava/lang/Object;
-}
-
 public final class com/github/kantis/mikrom/Mikrom {
 	public static final field Companion Lcom/github/kantis/mikrom/Mikrom$Companion;
 	public fun <init> (Ljava/util/Map;)V
@@ -38,6 +34,10 @@ public final class com/github/kantis/mikrom/Query {
 	public fun toString ()Ljava/lang/String;
 	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
 	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public abstract interface class com/github/kantis/mikrom/RowMapper {
+	public abstract fun mapRow (Ljava/util/Map;)Ljava/lang/Object;
 }
 
 public abstract interface class com/github/kantis/mikrom/datasource/DataSource {

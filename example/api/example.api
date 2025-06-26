@@ -13,6 +13,11 @@ public final class Book {
 	public fun toString ()Ljava/lang/String;
 }
 
+public final class Book$RowMapper : com/github/kantis/mikrom/RowMapper {
+	public static final field INSTANCE LBook$RowMapper;
+	public final fun mapRow (Ljava/util/Map;)LBook;
+}
+
 public final class BookKt {
 	public static final fun main ()V
 	public static synthetic fun main ([Ljava/lang/String;)V

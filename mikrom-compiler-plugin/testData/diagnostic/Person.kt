@@ -1,6 +1,6 @@
-import com.github.kantis.mikrom.generator.GenerateRowMapper
+import com.github.kantis.mikrom.generator.RowMapped
 
-@GenerateRowMapper
+@RowMapped
 data class Person(
    val name: String,
    val nickname: String? = name,

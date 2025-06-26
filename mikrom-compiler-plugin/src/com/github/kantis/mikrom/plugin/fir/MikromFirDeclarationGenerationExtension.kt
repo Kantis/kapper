@@ -38,7 +38,7 @@ public class MikromFirDeclarationGenerationExtension(
    private fun rowMapperType(typeArgument: ConeTypeProjection) =
       ClassId(
          FqName("com.github.kantis.mikrom"),
-         Name.identifier("KRowMapper"),
+         Name.identifier("RowMapper"),
       ).createConeType(session, typeArguments = arrayOf(typeArgument))
 
    val mapStringToAny by lazy {
@@ -49,8 +49,8 @@ public class MikromFirDeclarationGenerationExtension(
    }
 
    override fun FirDeclarationPredicateRegistrar.registerPredicates() {
-      register(GENERATE_ROW_MAPPER_PREDICATE)
-      register(HAS_GENERATE_ROW_MAPPER_PREDICATE)
+      register(ROW_MAPPED_PREDICATE)
+      register(HAS_ROW_MAPPED_PREDICATE)
    }
 
    override fun generateNestedClassLikeDeclaration(
@@ -82,7 +82,7 @@ public class MikromFirDeclarationGenerationExtension(
       context: NestedClassGenerationContext,
    ): Set<Name> {
       val provider = session.predicateBasedProvider
-      if (!provider.matches(GENERATE_ROW_MAPPER_PREDICATE, classSymbol))
+      if (!provider.matches(ROW_MAPPED_PREDICATE, classSymbol))
          return emptySet()
 
       return setOf(ROW_MAPPER_CLASS_NAME)
@@ -147,12 +147,12 @@ public class MikromFirDeclarationGenerationExtension(
       private val ROW_MAPPER_CLASS_NAME = Name.identifier("RowMapper")
       private val MAP_ROW_FUN_NAME = Name.identifier("mapRow")
 
-      private val GENERATE_ROW_MAPPER_PREDICATE = DeclarationPredicate.Companion.create {
-         annotated(FqName("com.github.kantis.mikrom.generator.GenerateRowMapper"))
+      private val ROW_MAPPED_PREDICATE = DeclarationPredicate.Companion.create {
+         annotated(FqName("com.github.kantis.mikrom.generator.RowMapped"))
       }
 
-      private val HAS_GENERATE_ROW_MAPPER_PREDICATE = DeclarationPredicate.Companion.create {
-         hasAnnotated(FqName("com.github.kantis.mikrom.generator.GenerateRowMapper"))
+      private val HAS_ROW_MAPPED_PREDICATE = DeclarationPredicate.Companion.create {
+         hasAnnotated(FqName("com.github.kantis.mikrom.generator.RowMapped"))
       }
    }
 }

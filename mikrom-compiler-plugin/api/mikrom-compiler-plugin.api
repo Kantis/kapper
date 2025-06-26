@@ -5,14 +5,14 @@ public final class com/github/kantis/mikrom/plugin/MikromCompilerPluginRegistrar
 }
 
 public final class com/github/kantis/mikrom/plugin/MikromGenerateRowMapperClassKey : org/jetbrains/kotlin/GeneratedDeclarationKey {
-	public fun <init> (Lorg/jetbrains/kotlin/fir/symbols/impl/FirClassSymbol;Lorg/jetbrains/kotlin/fir/symbols/impl/FirConstructorSymbol;)V
+	public fun <init> (Lorg/jetbrains/kotlin/fir/symbols/impl/FirClassSymbol;Lorg/jetbrains/kotlin/fir/types/ConeClassLikeType;)V
 	public final fun component1 ()Lorg/jetbrains/kotlin/fir/symbols/impl/FirClassSymbol;
-	public final fun component2 ()Lorg/jetbrains/kotlin/fir/symbols/impl/FirConstructorSymbol;
-	public final fun copy (Lorg/jetbrains/kotlin/fir/symbols/impl/FirClassSymbol;Lorg/jetbrains/kotlin/fir/symbols/impl/FirConstructorSymbol;)Lcom/github/kantis/mikrom/plugin/MikromGenerateRowMapperClassKey;
-	public static synthetic fun copy$default (Lcom/github/kantis/mikrom/plugin/MikromGenerateRowMapperClassKey;Lorg/jetbrains/kotlin/fir/symbols/impl/FirClassSymbol;Lorg/jetbrains/kotlin/fir/symbols/impl/FirConstructorSymbol;ILjava/lang/Object;)Lcom/github/kantis/mikrom/plugin/MikromGenerateRowMapperClassKey;
+	public final fun component2 ()Lorg/jetbrains/kotlin/fir/types/ConeClassLikeType;
+	public final fun copy (Lorg/jetbrains/kotlin/fir/symbols/impl/FirClassSymbol;Lorg/jetbrains/kotlin/fir/types/ConeClassLikeType;)Lcom/github/kantis/mikrom/plugin/MikromGenerateRowMapperClassKey;
+	public static synthetic fun copy$default (Lcom/github/kantis/mikrom/plugin/MikromGenerateRowMapperClassKey;Lorg/jetbrains/kotlin/fir/symbols/impl/FirClassSymbol;Lorg/jetbrains/kotlin/fir/types/ConeClassLikeType;ILjava/lang/Object;)Lcom/github/kantis/mikrom/plugin/MikromGenerateRowMapperClassKey;
 	public fun equals (Ljava/lang/Object;)Z
-	public final fun getConstructorSymbol ()Lorg/jetbrains/kotlin/fir/symbols/impl/FirConstructorSymbol;
 	public final fun getOwnerClassSymbol ()Lorg/jetbrains/kotlin/fir/symbols/impl/FirClassSymbol;
+	public final fun getRowMapperType ()Lorg/jetbrains/kotlin/fir/types/ConeClassLikeType;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }
@@ -30,8 +30,8 @@ public final class com/github/kantis/mikrom/plugin/fir/MikromFirDeclarationGener
 	public fun generateConstructors (Lorg/jetbrains/kotlin/fir/extensions/DeclarationGenerationContext$Member;)Ljava/util/List;
 	public fun generateFunctions (Lorg/jetbrains/kotlin/name/CallableId;Lorg/jetbrains/kotlin/fir/extensions/DeclarationGenerationContext$Member;)Ljava/util/List;
 	public fun generateNestedClassLikeDeclaration (Lorg/jetbrains/kotlin/fir/symbols/impl/FirClassSymbol;Lorg/jetbrains/kotlin/name/Name;Lorg/jetbrains/kotlin/fir/extensions/DeclarationGenerationContext$Nested;)Lorg/jetbrains/kotlin/fir/symbols/impl/FirClassLikeSymbol;
-	public fun generateProperties (Lorg/jetbrains/kotlin/name/CallableId;Lorg/jetbrains/kotlin/fir/extensions/DeclarationGenerationContext$Member;)Ljava/util/List;
 	public fun getCallableNamesForClass (Lorg/jetbrains/kotlin/fir/symbols/impl/FirClassSymbol;Lorg/jetbrains/kotlin/fir/extensions/DeclarationGenerationContext$Member;)Ljava/util/Set;
+	public final fun getMapStringToAny ()Lorg/jetbrains/kotlin/fir/types/ConeClassLikeType;
 	public fun getNestedClassifiersNames (Lorg/jetbrains/kotlin/fir/symbols/impl/FirClassSymbol;Lorg/jetbrains/kotlin/fir/extensions/DeclarationGenerationContext$Nested;)Ljava/util/Set;
 	public fun registerPredicates (Lorg/jetbrains/kotlin/fir/extensions/FirDeclarationPredicateRegistrar;)V
 }
@@ -51,7 +51,6 @@ public final class com/github/kantis/mikrom/plugin/ir/MikromIrGenerationExtensio
 public final class com/github/kantis/mikrom/plugin/ir/MikromIrVisitor : org/jetbrains/kotlin/ir/visitors/IrVisitorVoid {
 	public static final field Companion Lcom/github/kantis/mikrom/plugin/ir/MikromIrVisitor$Companion;
 	public fun <init> (Lorg/jetbrains/kotlin/backend/common/extensions/IrPluginContext;)V
-	public fun visitClass (Lorg/jetbrains/kotlin/ir/declarations/IrClass;)V
 	public fun visitConstructor (Lorg/jetbrains/kotlin/ir/declarations/IrConstructor;)V
 	public fun visitElement (Lorg/jetbrains/kotlin/ir/IrElement;)V
 	public fun visitSimpleFunction (Lorg/jetbrains/kotlin/ir/declarations/IrSimpleFunction;)V

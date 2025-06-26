@@ -1,8 +1,7 @@
 // FIR_DUMP
 // DUMP_IR
 
-import com.github.kantis.mikrom.generator.GenerateRowMapper
-import com.github.kantis.mikrom.KRowMapper
+import com.github.kantis.mikrom.generator.RowMapped
 import kotlin.test.*
 
 fun box(): String {
@@ -16,7 +15,7 @@ fun box(): String {
    return "OK"
 }
 
-@GenerateRowMapper
+@RowMapped
 data class Person(
    val name: String,
    val nickname: String? = name,

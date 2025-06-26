@@ -5,4 +5,4 @@ package com.github.kantis.mikrom.generator
  */
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.SOURCE)
-public annotation class GenerateRowMapper
+public annotation class RowMapped

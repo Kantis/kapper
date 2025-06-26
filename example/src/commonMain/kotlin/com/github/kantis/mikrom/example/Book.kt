@@ -1,6 +1,6 @@
-import com.github.kantis.mikrom.generator.GenerateRowMapper
+import com.github.kantis.mikrom.generator.RowMapped
 
-@GenerateRowMapper
+@RowMapped
 data class Book(val author: String, val title: String, val numberOfPages: Int)
 
 fun main(){
