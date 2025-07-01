@@ -1,11 +1,25 @@
-- Test integration with connection pooling, and document usage
-- Auto-discovery of generated RowMappers
-  - Similar to how KotlinX serialization detects/registers serializers during initialization
-- Rename `KRowMapper` -> `RowMapper`
-- Add `ParameterMapper` (see below)
-  - Compiler plugin support for generation of parameter mappers
-- Provide a check for `@RowMapped`-annotated class, if it already contains a `RowMapper` object (would cause compiler errors if we try to generate another)
-- Generate informative errors when auto-generated RowMapper tries to bind a property of wrong type to the constructor
+# TODO
+## Feature completeness
+- [ ] Add `ParameterMapper` (see below)
+  - [ ] Compiler plugin support for generation of parameter mappers
+
+### Paused until requested or someone wants to build it
+- Fix JS target and add support for some JS-based DB driver.
+
+## Developer experience
+- [ ] Auto-discovery of generated RowMappers
+  - [ ] Similar to how KotlinX serialization detects/registers serializers during initialization
+- [ ] Provide a check for `@RowMapped`-annotated class, if it already contains a `RowMapper` object (would cause compiler errors if we try to generate another)
+- [ ] Generate informative errors when auto-generated RowMapper tries to bind a property of wrong type to the constructor
+- [ ] Improve logging
+
+## Testing
+- [ ] Ensure transaction management works correctly
+- [ ] Test integration with connection pooling, and document usage
+- [ ] Add tests to ensure SQL injection is not possible
+- [ ] Add tests with various other data sources (e.g., SQLite, PostgreSQL, Oracle?)
+
+- [x] Rename `KRowMapper` -> `RowMapper`
 
 ## Support KotlinX-serialization style registration of Row/Parameter mappers
 ```kotlin

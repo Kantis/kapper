@@ -55,30 +55,32 @@ public class JdbcTransaction(private val connection: Connection) : Transaction {
    }
 }
 
-public class JdbcDataSource(private val jdbcConnection: Connection) : DataSource {
+public class JdbcDataSource(private val underlyingDataSource: javax.sql.DataSource) : DataSource {
    override fun transaction(block: Transaction.() -> TransactionResult) {
-      jdbcConnection.beginRequest()
-      try {
-         val transaction = JdbcTransaction(jdbcConnection)
+      underlyingDataSource.connection.use { jdbcConnection ->
+         jdbcConnection.beginRequest()
+         try {
+            val transaction = JdbcTransaction(jdbcConnection)
 
-         when (transaction.block()) {
-            TransactionResult.Commit -> {
-               logger.debug("Committing transaction, since transaction resulted in {}", TransactionResult.Commit)
-               jdbcConnection.commit()
-            }
+            when (transaction.block()) {
+               TransactionResult.Commit -> {
+                  logger.info("Committing transaction, since transaction resulted in {}", TransactionResult.Commit)
+                  jdbcConnection.commit()
+               }
 
-            TransactionResult.Rollback -> {
-               logger.debug("Rolling back transaction, since transaction resulted in {}", TransactionResult.Rollback)
-               jdbcConnection.rollback()
+               TransactionResult.Rollback -> {
+                  logger.info("Rolling back transaction, since transaction resulted in {}", TransactionResult.Rollback)
+                  jdbcConnection.rollback()
+               }
             }
+         } catch (e: Exception) {
+            logger.warn("Rolling back transaction, since transaction resulted in unhandled exception: {}", e.message)
+            jdbcConnection.rollback()
+            throw e
+         } finally {
+            logger.debug("Closing JDBC request")
+            jdbcConnection.endRequest()
          }
-      } catch (e: Exception) {
-         logger.warn("Rolling back transaction, since transaction resulted in unhandled exception: {}", e.message)
-         jdbcConnection.rollback()
-         throw e
-      } finally {
-         logger.debug("Closing JDBC request")
-         jdbcConnection.endRequest()
       }
    }
 

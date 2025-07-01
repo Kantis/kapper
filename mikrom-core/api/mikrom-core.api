@@ -18,6 +18,8 @@ public abstract interface annotation class com/github/kantis/mikrom/MikromIntern
 }
 
 public final class com/github/kantis/mikrom/QueriesKt {
+	public static final fun execute-v1zWpgk (Lcom/github/kantis/mikrom/datasource/Transaction;Lcom/github/kantis/mikrom/Mikrom;Ljava/lang/String;)V
+	public static final fun execute-vEHX32Y (Lcom/github/kantis/mikrom/datasource/Transaction;Lcom/github/kantis/mikrom/Mikrom;Ljava/lang/String;Ljava/util/List;)V
 	public static final fun execute-vEHX32Y (Lcom/github/kantis/mikrom/datasource/Transaction;Lcom/github/kantis/mikrom/Mikrom;Ljava/lang/String;[Ljava/lang/Object;)V
 	public static final fun execute-vEHX32Y (Lcom/github/kantis/mikrom/datasource/Transaction;Lcom/github/kantis/mikrom/Mikrom;Ljava/lang/String;[Ljava/util/List;)V
 }

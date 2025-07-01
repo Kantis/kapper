@@ -30,7 +30,7 @@ public inline fun <reified T> Mikrom.queryFor(
 }
 
 context(Transaction)
-public inline fun <reified T> Mikrom.execute(
+public inline fun Mikrom.execute(
    query: Query,
    params: List<Any>,
 ) {
@@ -51,4 +51,11 @@ public fun Mikrom.execute(
    vararg params: Any,
 ) {
    params.forEach { executeInTransaction(query, listOf(it)) }
+}
+
+context(Transaction)
+public fun Mikrom.execute(
+   query: Query,
+) {
+    executeInTransaction(query, emptyList())
 }

@@ -4,30 +4,42 @@ import com.github.kantis.mikrom.Mikrom
 import com.github.kantis.mikrom.Query
 import com.github.kantis.mikrom.datasource.TransactionResult
 import com.github.kantis.mikrom.execute
-import com.github.kantis.mikrom.jdbc.h2.prepareH2Database
 import com.github.kantis.mikrom.queryFor
+import io.kotest.core.extensions.install
 import io.kotest.core.spec.style.FunSpec
+import io.kotest.extensions.testcontainers.JdbcDatabaseContainerExtension
 import io.kotest.matchers.shouldBe
+import org.testcontainers.containers.PostgreSQLContainer
 
-private data class Book(val author: String, val title: String, val numberOfPages: Int)
 
-class MikromJdbcTest : FunSpec(
+class MikromJdbcPostgresTest : FunSpec(
    {
+      val postgres = install(JdbcDatabaseContainerExtension(PostgreSQLContainer("postgres:13"))) {
+         username = "admin"
+         password = "foo"
+      }
+
       test("integrate with H2 JDBC data source") {
          val mikrom =
             Mikrom {
                registerMapper { row -> Book(row["author"] as String, row["title"] as String, row["number_of_pages"] as Int) }
             }
 
-         val dataSource = prepareH2Database(
-            """
-               CREATE TABLE books (
-                  author VARCHAR(255),
-                  title VARCHAR(255),
-                  number_of_pages INT
-               )
-            """.trimIndent(),
-         )
+         val dataSource = JdbcDataSource(postgres.dataSource)
+         dataSource.transaction {
+            mikrom.execute(
+               Query(
+                  """
+                  CREATE TABLE books (
+                     author VARCHAR(255),
+                     title VARCHAR(255),
+                     number_of_pages INT
+                  )
+               """.trimIndent(),
+               ),
+            )
+            TransactionResult.Commit
+         }
 
          dataSource.transaction {
             mikrom.execute(
@@ -49,4 +61,6 @@ class MikromJdbcTest : FunSpec(
          }
       }
    },
-)
+) {
+   private data class Book(val author: String, val title: String, val numberOfPages: Int)
+}
