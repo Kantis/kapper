@@ -15,6 +15,7 @@ I want explicit control over what is being updated, and how. With Mikrom, you ar
 Command-query separation becomes natural, since there is no relationship between reading and writing data tied to some "entity" class.
 
 ## Usage
+> Note: This library is in the concept stage. The API is highly likely to change, and the compiler plugin is work in progress.
 
 ### JDBC
 Create a JDBC connection and construct a `Mikrom` instance:
@@ -35,7 +36,13 @@ val mikrom = Mikrom {
   }
 }
 
-// All queries must be executed within a transaction scope.
+// Compilation error, `execute` is only defined in the context of a transaction.
+mikrom.execute(
+  Query("INSERT INTO books (author, title, number_of_pages) VALUES (?, ?, ?)"),
+  listOf("JRR Tolkien", "The Hobbit", 310),
+  listOf("George Orwell", "1984", 328),
+)
+
 dataSource.transaction {
   mikrom.execute(
     Query("INSERT INTO books (author, title, number_of_pages) VALUES (?, ?, ?)"),
@@ -51,7 +58,40 @@ dataSource.transaction {
 
   mikrom.queryFor<Book>(Query("SELECT * FROM books WHERE number_of_pages > ?"), 320) shouldBe
     listOf(Book("George Orwell", "1984", 328))
+
+  // The transaction scope must result in either Commit or Rollback.
+  // If the block exits by throwing an exception, it will automatically roll back.
+  TransactionResult.Commit
 }
+```
+
+### Parameter mappers
+Building on our previous example, lets say we want structured Query types. We can leverage ParameterMappers to achieve this.
+
+```kotlin
+data class SearchBooksByNumberOfPages(val minPages: Int)
+
+val mikrom = Mikrom {
+  registerParameterMapper<SearchBooksByNumberOfPages> { request ->
+    mapOf("minPages" to request.minPages)
+  }
+}
+
+dataSource.transaction {
+  mikrom.queryFor<Book>(
+    Query("SELECT * FROM books WHERE number_of_pages > :minPages"),
+    SearchBooksbyNumberOfPages(320),
+  ) shouldBe listOf(Book("George Orwell", "1984", 328))
+}
+```
+
+### Compiler plugin
+Using the compiler plugin, you can annotate your data classes with `@RowMapped` to automatically generate row mappers.
+
+```kotlin
+// This will automatically generate a `RowMapper<Book>` implementation and register it with Mikrom.
+@RowMapped
+data class Book(val author: String, val title: String, val numberOfPages: Int)
 ```
 
 
