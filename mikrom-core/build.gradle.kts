@@ -7,6 +7,12 @@ plugins {
 
 kotlin {
    sourceSets {
+      commonMain {
+         dependencies {
+            implementation(libs.jetbrains.annotations)
+         }
+      }
+
       commonTest {
          dependencies {
             implementation(libs.kotest.frameworkEngine)
