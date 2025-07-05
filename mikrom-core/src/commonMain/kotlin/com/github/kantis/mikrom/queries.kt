@@ -1,10 +1,11 @@
 package com.github.kantis.mikrom
 
 import com.github.kantis.mikrom.datasource.Transaction
+import org.intellij.lang.annotations.Language
 import kotlin.jvm.JvmInline
 
 @JvmInline
-public value class Query(public val value: String)
+public value class Query(@Language("SQL") public val value: String)
 
 public inline fun <reified T> Mikrom.queryForSingleOrNull(query: Query): T? = null
 
