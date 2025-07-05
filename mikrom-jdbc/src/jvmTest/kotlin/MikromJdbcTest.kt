@@ -16,7 +16,13 @@ class MikromJdbcTest : FunSpec(
       test("integrate with H2 JDBC data source") {
          val mikrom =
             Mikrom {
-               registerMapper { row -> Book(row["author"] as String, row["title"] as String, row["number_of_pages"] as Int) }
+               registerRowMapper { row ->
+                  Book(
+                     row["author"] as String,
+                     row["title"] as String,
+                     row["number_of_pages"] as Int,
+                  )
+               }
             }
 
          val dataSource = prepareH2Database(

@@ -5,9 +5,7 @@ import com.zaxxer.hikari.HikariDataSource
 import org.h2.Driver
 import java.sql.DriverManager
 
-fun prepareH2Database(
-   vararg statements: String,
-): JdbcDataSource {
+fun prepareH2Database(vararg statements: String): JdbcDataSource {
    val connectionString = "jdbc:h2:mem:test;IGNORECASE=true;MODE=MYSQL;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false;"
    DriverManager.registerDriver(Driver())
    val jdbcConnection = DriverManager.getConnection(connectionString)

@@ -1,6 +1,6 @@
 public final class com/github/kantis/mikrom/jdbc/JdbcDataSource : com/github/kantis/mikrom/datasource/DataSource {
 	public static final field Companion Lcom/github/kantis/mikrom/jdbc/JdbcDataSource$Companion;
-	public fun <init> (Ljava/sql/Connection;)V
+	public fun <init> (Ljavax/sql/DataSource;)V
 	public fun transaction (Lkotlin/jvm/functions/Function1;)V
 }
 

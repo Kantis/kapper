@@ -8,26 +8,26 @@ import com.github.kantis.mikrom.jdbc.h2.prepareH2Database
 import com.github.kantis.mikrom.queryFor
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldContainExactly
-import io.kotest.matchers.shouldBe
 import io.kotest.matchers.collections.shouldHaveSize
+import io.kotest.matchers.shouldBe
 
 data class TestRecord(val id: Int, val name: String)
 
 class JdbcTransactionTest : FunSpec(
    {
       val mikrom = Mikrom {
-         registerMapper { row ->
+         registerRowMapper { row ->
             TestRecord(row["id"] as Int, row["name"] as String)
          }
       }
 
       val dataSource = prepareH2Database(
          """
-               CREATE TABLE test_records(
-                 id INT PRIMARY KEY,
-                 name VARCHAR(255)
-               );
-            """.trimIndent(),
+            CREATE TABLE test_records(
+              id INT PRIMARY KEY,
+              name VARCHAR(255)
+            );
+         """.trimIndent(),
       )
 
       afterEach {

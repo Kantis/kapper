@@ -4,10 +4,15 @@ import kotlin.reflect.KClass
 
 public class MikromBuilder {
    public val rowMappers: MutableMap<KClass<*>, RowMapper<*>> = mutableMapOf()
+   public val parameterMappers: MutableMap<KClass<*>, ParameterMapper<*>> = mutableMapOf()
 
-   public inline fun <reified T> registerMapper(mapper: RowMapper<T>) {
+   public inline fun <reified T> registerRowMapper(mapper: RowMapper<T>) {
       rowMappers.put(T::class, mapper)
    }
 
-   public fun build(): Mikrom = Mikrom(rowMappers)
+   public inline fun <reified T> registerParameterMapper(mapper: ParameterMapper<T>) {
+      parameterMappers.put(T::class, mapper)
+   }
+
+   public fun build(): Mikrom = Mikrom(rowMappers, parameterMappers)
 }

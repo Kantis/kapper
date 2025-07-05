@@ -10,7 +10,7 @@ public inline fun <reified T> Mikrom.queryForSingleOrNull(query: Query): T? = nu
 
 context(Transaction)
 public inline fun <reified T> Mikrom.queryFor(query: Query): List<T> {
-   val rowMapper = resolveMapper<T>()
+   val rowMapper = resolveRowMapper<T>()
    return query(query).map(rowMapper::mapRow)
 }
 
@@ -25,7 +25,7 @@ public inline fun <reified T> Mikrom.queryFor(
    query: Query,
    params: List<Any>,
 ): List<T> {
-   val rowMapper = resolveMapper<T>()
+   val rowMapper = resolveRowMapper<T>()
    return query(query, params).map(rowMapper::mapRow)
 }
 
@@ -54,8 +54,15 @@ public fun Mikrom.execute(
 }
 
 context(Transaction)
-public fun Mikrom.execute(
+public fun Mikrom.execute(query: Query) {
+   executeInTransaction(query, emptyList())
+}
+
+context(Transaction)
+public inline fun <reified T> Mikrom.executeWithParameters(
    query: Query,
+   value: T,
 ) {
-    executeInTransaction(query, emptyList())
+   val parameterMapper = resolveParameterMapper<T>()
+   execute(query, parameterMapper.toParams(value))
 }

@@ -11,7 +11,6 @@ import io.kotest.extensions.testcontainers.JdbcDatabaseContainerExtension
 import io.kotest.matchers.shouldBe
 import org.testcontainers.containers.PostgreSQLContainer
 
-
 class MikromJdbcPostgresTest : FunSpec(
    {
       val postgres = install(JdbcDatabaseContainerExtension(PostgreSQLContainer("postgres:13"))) {
@@ -22,7 +21,13 @@ class MikromJdbcPostgresTest : FunSpec(
       test("integrate with H2 JDBC data source") {
          val mikrom =
             Mikrom {
-               registerMapper { row -> Book(row["author"] as String, row["title"] as String, row["number_of_pages"] as Int) }
+               registerRowMapper { row ->
+                  Book(
+                     row["author"] as String,
+                     row["title"] as String,
+                     row["number_of_pages"] as Int,
+                  )
+               }
             }
 
          val dataSource = JdbcDataSource(postgres.dataSource)
@@ -35,7 +40,7 @@ class MikromJdbcPostgresTest : FunSpec(
                      title VARCHAR(255),
                      number_of_pages INT
                   )
-               """.trimIndent(),
+                  """.trimIndent(),
                ),
             )
             TransactionResult.Commit

@@ -1,6 +1,11 @@
+public final class QueryExecution {
+	public static final field INSTANCE LQueryExecution;
+}
+
 public final class com/github/kantis/mikrom/Mikrom {
 	public static final field Companion Lcom/github/kantis/mikrom/Mikrom$Companion;
-	public fun <init> (Ljava/util/Map;)V
+	public fun <init> (Ljava/util/Map;Ljava/util/Map;)V
+	public final fun getParameterMappers ()Ljava/util/Map;
 	public final fun getRowMappers ()Ljava/util/Map;
 }
 
@@ -11,10 +16,15 @@ public final class com/github/kantis/mikrom/Mikrom$Companion {
 public final class com/github/kantis/mikrom/MikromBuilder {
 	public fun <init> ()V
 	public final fun build ()Lcom/github/kantis/mikrom/Mikrom;
+	public final fun getParameterMappers ()Ljava/util/Map;
 	public final fun getRowMappers ()Ljava/util/Map;
 }
 
 public abstract interface annotation class com/github/kantis/mikrom/MikromInternal : java/lang/annotation/Annotation {
+}
+
+public abstract interface class com/github/kantis/mikrom/ParameterMapper {
+	public abstract fun toParams (Ljava/lang/Object;)Ljava/util/Map;
 }
 
 public final class com/github/kantis/mikrom/QueriesKt {

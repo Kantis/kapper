@@ -11,18 +11,18 @@ class MikromTest : FunSpec({
    test("Resolve mapper") {
       val mikrom =
          Mikrom {
-            registerMapper { row -> Foo(row["bar"] as String) }
+            registerRowMapper { row -> Foo(row["bar"] as String) }
          }
 
       mikrom
-         .resolveMapper<Foo>()
+         .resolveRowMapper<Foo>()
          .mapRow(mapOf("bar" to "baz")) shouldBe Foo("baz")
    }
 
    test("integrate with data sources") {
       val mikrom =
          Mikrom {
-            registerMapper { row -> Foo(row["bar"] as String) }
+            registerRowMapper { row -> Foo(row["bar"] as String) }
          }
 
       val dataSource =
