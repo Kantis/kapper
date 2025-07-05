@@ -58,6 +58,7 @@ public class JdbcTransaction(private val connection: Connection) : Transaction {
 public class JdbcDataSource(private val underlyingDataSource: javax.sql.DataSource) : DataSource {
    override fun transaction(block: Transaction.() -> TransactionResult) {
       underlyingDataSource.connection.use { jdbcConnection ->
+         jdbcConnection.autoCommit = false
          jdbcConnection.beginRequest()
          try {
             val transaction = JdbcTransaction(jdbcConnection)
