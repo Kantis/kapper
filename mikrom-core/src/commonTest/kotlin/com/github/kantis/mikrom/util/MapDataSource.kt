@@ -4,15 +4,14 @@ import com.github.kantis.mikrom.Query
 import com.github.kantis.mikrom.Row
 import com.github.kantis.mikrom.datasource.DataSource
 import com.github.kantis.mikrom.datasource.Transaction
-import com.github.kantis.mikrom.datasource.TransactionResult
 
 class InMemoryDataSource(
    val rows: List<Row>,
 ) : DataSource {
-   override fun transaction(block: Transaction.() -> TransactionResult) {
+   override fun <T> transaction(block: Transaction.() -> T): T {
       val transaction = InMemoryTransaction(rows)
 
-      transaction.block()
+      return transaction.block()
    }
 }
 

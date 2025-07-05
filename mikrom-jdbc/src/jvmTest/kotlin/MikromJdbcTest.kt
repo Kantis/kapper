@@ -2,7 +2,6 @@ package com.github.kantis.mikrom.jdbc
 
 import com.github.kantis.mikrom.Mikrom
 import com.github.kantis.mikrom.Query
-import com.github.kantis.mikrom.datasource.TransactionResult
 import com.github.kantis.mikrom.execute
 import com.github.kantis.mikrom.jdbc.h2.prepareH2Database
 import com.github.kantis.mikrom.queryFor
@@ -50,8 +49,6 @@ class MikromJdbcTest : FunSpec(
 
             mikrom.queryFor<Book>(Query("SELECT * FROM books WHERE number_of_pages > ?"), 320) shouldBe
                listOf(Book("George Orwell", "1984", 328))
-
-            TransactionResult.Rollback
          }
       }
    },

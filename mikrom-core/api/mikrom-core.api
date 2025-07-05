@@ -47,7 +47,11 @@ public abstract interface class com/github/kantis/mikrom/RowMapper {
 }
 
 public abstract interface class com/github/kantis/mikrom/datasource/DataSource {
-	public abstract fun transaction (Lkotlin/jvm/functions/Function1;)V
+	public abstract fun transaction (Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+}
+
+public final class com/github/kantis/mikrom/datasource/Rollback {
+	public static final field INSTANCE Lcom/github/kantis/mikrom/datasource/Rollback;
 }
 
 public abstract interface class com/github/kantis/mikrom/datasource/Transaction {
@@ -57,14 +61,6 @@ public abstract interface class com/github/kantis/mikrom/datasource/Transaction 
 
 public final class com/github/kantis/mikrom/datasource/Transaction$DefaultImpls {
 	public static synthetic fun query-tOu8PdM$default (Lcom/github/kantis/mikrom/datasource/Transaction;Ljava/lang/String;Ljava/util/List;ILjava/lang/Object;)Ljava/util/List;
-}
-
-public final class com/github/kantis/mikrom/datasource/TransactionResult : java/lang/Enum {
-	public static final field Commit Lcom/github/kantis/mikrom/datasource/TransactionResult;
-	public static final field Rollback Lcom/github/kantis/mikrom/datasource/TransactionResult;
-	public static fun getEntries ()Lkotlin/enums/EnumEntries;
-	public static fun valueOf (Ljava/lang/String;)Lcom/github/kantis/mikrom/datasource/TransactionResult;
-	public static fun values ()[Lcom/github/kantis/mikrom/datasource/TransactionResult;
 }
 
 public abstract interface annotation class com/github/kantis/mikrom/generator/RowMapped : java/lang/annotation/Annotation {

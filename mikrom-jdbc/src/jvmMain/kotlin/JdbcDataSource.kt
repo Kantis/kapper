@@ -3,8 +3,8 @@ package com.github.kantis.mikrom.jdbc
 import com.github.kantis.mikrom.Query
 import com.github.kantis.mikrom.Row
 import com.github.kantis.mikrom.datasource.DataSource
+import com.github.kantis.mikrom.datasource.Rollback
 import com.github.kantis.mikrom.datasource.Transaction
-import com.github.kantis.mikrom.datasource.TransactionResult
 import org.slf4j.LoggerFactory
 import java.sql.Connection
 import java.sql.PreparedStatement
@@ -56,24 +56,27 @@ public class JdbcTransaction(private val connection: Connection) : Transaction {
 }
 
 public class JdbcDataSource(private val underlyingDataSource: javax.sql.DataSource) : DataSource {
-   override fun transaction(block: Transaction.() -> TransactionResult) {
+   override fun <T> transaction(block: Transaction.() -> T): T {
       underlyingDataSource.connection.use { jdbcConnection ->
          jdbcConnection.autoCommit = false
          jdbcConnection.beginRequest()
-         try {
+         return try {
             val transaction = JdbcTransaction(jdbcConnection)
+            val result = transaction.block()
 
-            when (transaction.block()) {
-               TransactionResult.Commit -> {
-                  logger.info("Committing transaction, since transaction resulted in {}", TransactionResult.Commit)
-                  jdbcConnection.commit()
-               }
-
-               TransactionResult.Rollback -> {
-                  logger.info("Rolling back transaction, since transaction resulted in {}", TransactionResult.Rollback)
+            when (result) {
+               is Rollback -> {
+                  logger.info("Rolling back transaction, since transaction resulted in TransactionResult.Rollback")
                   jdbcConnection.rollback()
                }
+
+               else -> {
+                  logger.info("Committing transaction, since transaction resulted in TransactionResult.Commit")
+                  jdbcConnection.commit()
+               }
             }
+
+            result
          } catch (e: Exception) {
             logger.warn("Rolling back transaction, since transaction resulted in unhandled exception: {}", e.message)
             jdbcConnection.rollback()

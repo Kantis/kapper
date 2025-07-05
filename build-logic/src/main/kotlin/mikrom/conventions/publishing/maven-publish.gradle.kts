@@ -89,6 +89,10 @@ signing {
    val signingPassword: String? by project
 
    logger.lifecycle("[maven-publish convention] signing is enabled for ${project.path}")
+   if (signingKey.isNullOrBlank() || signingPassword.isNullOrBlank()) {
+      logger.lifecycle("[maven-publish convention] signing key or password is not set, skipping signing")
+      return@signing
+   }
    useGpgCmd()
    useInMemoryPgpKeys(signingKey, signingPassword)
    sign(publishing.publications)
@@ -104,7 +108,7 @@ tasks.withType<AbstractPublishToMaven>().configureEach {
    mustRunAfter(signingTasks)
 
    // use a val for the GAV to avoid Gradle Configuration Cache issues
-   val publicationGAV = publication?.run { "$group:$artifactId:$version" }
+   val publicationGAV = publication?.run { "io.github.kantis.mikrom:$artifactId:$version" }
 
    doLast {
       if (publicationGAV != null) {
