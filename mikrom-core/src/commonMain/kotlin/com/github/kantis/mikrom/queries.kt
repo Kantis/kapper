@@ -5,7 +5,9 @@ import org.intellij.lang.annotations.Language
 import kotlin.jvm.JvmInline
 
 @JvmInline
-public value class Query(@Language("SQL") public val value: String)
+public value class Query(
+   @Language("SQL") public val value: String,
+)
 
 public inline fun <reified T> Mikrom.queryForSingleOrNull(query: Query): T? = null
 
@@ -47,9 +49,9 @@ public fun Mikrom.execute(
 }
 
 context(Transaction)
-public fun Mikrom.execute(
+public fun <T : Any> Mikrom.execute(
    query: Query,
-   vararg params: Any,
+   vararg params: T,
 ) {
    params.forEach { executeInTransaction(query, listOf(it)) }
 }
@@ -57,13 +59,4 @@ public fun Mikrom.execute(
 context(Transaction)
 public fun Mikrom.execute(query: Query) {
    executeInTransaction(query, emptyList())
-}
-
-context(Transaction)
-public inline fun <reified T> Mikrom.executeWithParameters(
-   query: Query,
-   value: T,
-) {
-   val parameterMapper = resolveParameterMapper<T>()
-   execute(query, parameterMapper.toParams(value))
 }

@@ -38,7 +38,7 @@ class MikromJdbcPostgresTest : FunSpec(
                      title VARCHAR(255),
                      number_of_pages INT
                   )
-                  """.trimIndent(),
+               """.trimIndent(),
             ),
          )
          TransactionResult.Commit

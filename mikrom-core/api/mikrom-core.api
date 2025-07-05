@@ -4,8 +4,7 @@ public final class QueryExecution {
 
 public final class com/github/kantis/mikrom/Mikrom {
 	public static final field Companion Lcom/github/kantis/mikrom/Mikrom$Companion;
-	public fun <init> (Ljava/util/Map;Ljava/util/Map;)V
-	public final fun getParameterMappers ()Ljava/util/Map;
+	public fun <init> (Ljava/util/Map;)V
 	public final fun getRowMappers ()Ljava/util/Map;
 }
 
@@ -16,15 +15,10 @@ public final class com/github/kantis/mikrom/Mikrom$Companion {
 public final class com/github/kantis/mikrom/MikromBuilder {
 	public fun <init> ()V
 	public final fun build ()Lcom/github/kantis/mikrom/Mikrom;
-	public final fun getParameterMappers ()Ljava/util/Map;
 	public final fun getRowMappers ()Ljava/util/Map;
 }
 
 public abstract interface annotation class com/github/kantis/mikrom/MikromInternal : java/lang/annotation/Annotation {
-}
-
-public abstract interface class com/github/kantis/mikrom/ParameterMapper {
-	public abstract fun toParams (Ljava/lang/Object;)Ljava/util/Map;
 }
 
 public final class com/github/kantis/mikrom/QueriesKt {
@@ -71,9 +65,6 @@ public final class com/github/kantis/mikrom/datasource/TransactionResult : java/
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public static fun valueOf (Ljava/lang/String;)Lcom/github/kantis/mikrom/datasource/TransactionResult;
 	public static fun values ()[Lcom/github/kantis/mikrom/datasource/TransactionResult;
-}
-
-public abstract interface annotation class com/github/kantis/mikrom/generator/ParameterMapped : java/lang/annotation/Annotation {
 }
 
 public abstract interface annotation class com/github/kantis/mikrom/generator/RowMapped : java/lang/annotation/Annotation {

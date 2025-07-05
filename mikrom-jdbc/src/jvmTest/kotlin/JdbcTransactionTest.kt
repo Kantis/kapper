@@ -16,9 +16,7 @@ data class TestRecord(val id: Int, val name: String)
 class JdbcTransactionTest : FunSpec(
    {
       val mikrom = Mikrom {
-         registerRowMapper { row ->
-            TestRecord(row["id"] as Int, row["name"] as String)
-         }
+         registerRowMapper { row -> TestRecord(row["id"] as Int, row["name"] as String) }
       }
 
       val dataSource = prepareH2Database(
@@ -120,7 +118,7 @@ class JdbcTransactionTest : FunSpec(
          dataSource.transaction {
             mikrom.execute(
                Query("INSERT INTO test_records (id, name) VALUES (?, ?)"),
-               TestRecord(1, "original_name"),
+               listOf(1, "original_name"),
             )
             TransactionResult.Commit
          }
