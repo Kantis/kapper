@@ -14,6 +14,11 @@ kotlinBinaryCompatibilityValidator = "0.17.0"
 
 [libraries]
 
+h2 = { module = "com.h2database:h2", version = "2.3.232" }
+postgresql = { module = "org.postgresql:postgresql", version = "42.6.0" }
+slf4j-api = { module = "org.slf4j:slf4j-api", version = "2.0.9" }
+logback-classic = { module = "ch.qos.logback:logback-classic", version = "1.4.11" }
+
 ## Kotest ##
 kotest-assertionsCore = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
 kotest-assertionsJson = { module = "io.kotest:kotest-assertions-json", version.ref = "kotest" }
@@ -25,6 +30,10 @@ kotest-frameworkDatatest = { module = "io.kotest:kotest-framework-datatest", ver
 kotest-runnerJunit5 = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
 
 kotest-propertyArbsExtension = { module = "io.kotest.extensions:kotest-property-arbs", version.ref = "kotest-propertyArbsExtension" }
+kotestExtensions-testcontainers = { module = "io.kotest.extensions:kotest-extensions-testcontainers", version = "2.0.2" }
+
+testcontainers-postgresql = { module = "org.testcontainers:postgresql", version = "1.20.0" }
+hikari = { module = "com.zaxxer:HikariCP", version = "6.3.0" }
 
 kotestPlugin-embeddedCompiler = { module = "io.kotest:kotest-framework-multiplatform-plugin-embeddable-compiler" }
 kotestPlugin-multiplatform = { module = "io.kotest:kotest-framework-multiplatform-plugin-gradle" }
@@ -34,9 +43,6 @@ jetbrains-annotations = { module = "org.jetbrains:annotations", version = "26.0.
 ## Dokka plugins ##
 dokka-allModulesPage = { module = "org.jetbrains.dokka:all-modules-page-plugin", version.ref = "dokka" }
 dokka-templating = { module = "org.jetbrains.dokka:templating-plugin", version.ref = "dokka" }
-
-# H2
-h2 = { module = "com.h2database:h2", version = "2.3.232" }
 
 ### Gradle plugins ###
 # Maven coordinates of Gradle plugins. Used in ./build-logic/build.gradle.kts.

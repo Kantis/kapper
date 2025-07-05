@@ -1,6 +1,11 @@
+public final class QueryExecution {
+	public static final field INSTANCE LQueryExecution;
+}
+
 public final class com/github/kantis/mikrom/Mikrom {
 	public static final field Companion Lcom/github/kantis/mikrom/Mikrom$Companion;
-	public fun <init> (Ljava/util/Map;)V
+	public fun <init> (Ljava/util/Map;Ljava/util/Map;)V
+	public final fun getParameterMappers ()Ljava/util/Map;
 	public final fun getRowMappers ()Ljava/util/Map;
 }
 
@@ -11,13 +16,20 @@ public final class com/github/kantis/mikrom/Mikrom$Companion {
 public final class com/github/kantis/mikrom/MikromBuilder {
 	public fun <init> ()V
 	public final fun build ()Lcom/github/kantis/mikrom/Mikrom;
+	public final fun getParameterMappers ()Ljava/util/Map;
 	public final fun getRowMappers ()Ljava/util/Map;
 }
 
 public abstract interface annotation class com/github/kantis/mikrom/MikromInternal : java/lang/annotation/Annotation {
 }
 
+public abstract interface class com/github/kantis/mikrom/ParameterMapper {
+	public abstract fun toParams (Ljava/lang/Object;)Ljava/util/Map;
+}
+
 public final class com/github/kantis/mikrom/QueriesKt {
+	public static final fun execute-v1zWpgk (Lcom/github/kantis/mikrom/datasource/Transaction;Lcom/github/kantis/mikrom/Mikrom;Ljava/lang/String;)V
+	public static final fun execute-vEHX32Y (Lcom/github/kantis/mikrom/datasource/Transaction;Lcom/github/kantis/mikrom/Mikrom;Ljava/lang/String;Ljava/util/List;)V
 	public static final fun execute-vEHX32Y (Lcom/github/kantis/mikrom/datasource/Transaction;Lcom/github/kantis/mikrom/Mikrom;Ljava/lang/String;[Ljava/lang/Object;)V
 	public static final fun execute-vEHX32Y (Lcom/github/kantis/mikrom/datasource/Transaction;Lcom/github/kantis/mikrom/Mikrom;Ljava/lang/String;[Ljava/util/List;)V
 }
@@ -53,12 +65,17 @@ public final class com/github/kantis/mikrom/datasource/Transaction$DefaultImpls 
 	public static synthetic fun query-tOu8PdM$default (Lcom/github/kantis/mikrom/datasource/Transaction;Ljava/lang/String;Ljava/util/List;ILjava/lang/Object;)Ljava/util/List;
 }
 
-public abstract interface annotation class com/github/kantis/mikrom/generator/AutoMapper : java/lang/annotation/Annotation {
+public final class com/github/kantis/mikrom/datasource/TransactionResult : java/lang/Enum {
+	public static final field Commit Lcom/github/kantis/mikrom/datasource/TransactionResult;
+	public static final field Rollback Lcom/github/kantis/mikrom/datasource/TransactionResult;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/github/kantis/mikrom/datasource/TransactionResult;
+	public static fun values ()[Lcom/github/kantis/mikrom/datasource/TransactionResult;
 }
 
-public abstract interface annotation class com/github/kantis/mikrom/generator/GenerateRowMapper : java/lang/annotation/Annotation {
+public abstract interface annotation class com/github/kantis/mikrom/generator/ParameterMapped : java/lang/annotation/Annotation {
 }
 
-public abstract interface annotation class com/github/kantis/mikrom/generator/ParameterMapper : java/lang/annotation/Annotation {
+public abstract interface annotation class com/github/kantis/mikrom/generator/RowMapped : java/lang/annotation/Annotation {
 }
 

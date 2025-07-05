@@ -19,6 +19,7 @@ kotlin {
             dependencies {
                implementation(kotlin("reflect"))
                implementation(projects.mikromCore)
+               implementation(libs.slf4j.api)
             }
          }
 
@@ -26,12 +27,16 @@ kotlin {
             dependencies {
                implementation(libs.kotest.runnerJunit5)
                implementation(libs.h2)
+               implementation(libs.postgresql)
+               implementation(libs.logback.classic)
+               implementation(libs.kotestExtensions.testcontainers)
+               implementation(libs.testcontainers.postgresql)
+               implementation(libs.hikari)
             }
          }
       }
    }
 }
-
 
 dependencies {
    kotlinCompilerPluginClasspath(projects.mikromCompilerPlugin)

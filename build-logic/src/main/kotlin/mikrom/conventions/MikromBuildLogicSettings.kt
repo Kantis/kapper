@@ -22,7 +22,8 @@ abstract class MikromBuildLogicSettings
       val enableKotlinJvm: Provider<Boolean> = mikromFlag("enableKotlinJvm", true)
 
       /** Controls whether Kotlin Multiplatform JS is enabled */
-      val enableKotlinJs: Provider<Boolean> = mikromFlag("enableKotlinJs", true)
+      // Disabling for now, seems to be some compilation issue in Mikrom-core when using Kotlin/JS
+      val enableKotlinJs: Provider<Boolean> = mikromFlag("enableKotlinJs", false)
 
       /** Controls whether Kotlin Multiplatform Native is enabled */
       val enableKotlinNative: Provider<Boolean> = mikromFlag("enableKotlinNative", false)

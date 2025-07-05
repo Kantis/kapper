@@ -1,5 +1,6 @@
 package com.github.kantis.mikrom
 
+import com.github.kantis.mikrom.datasource.TransactionResult
 import com.github.kantis.mikrom.util.InMemoryDataSource
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
@@ -10,18 +11,18 @@ class MikromTest : FunSpec({
    test("Resolve mapper") {
       val mikrom =
          Mikrom {
-            registerMapper { row -> Foo(row["bar"] as String) }
+            registerRowMapper { row -> Foo(row["bar"] as String) }
          }
 
       mikrom
-         .resolveMapper<Foo>()
+         .resolveRowMapper<Foo>()
          .mapRow(mapOf("bar" to "baz")) shouldBe Foo("baz")
    }
 
    test("integrate with data sources") {
       val mikrom =
          Mikrom {
-            registerMapper { row -> Foo(row["bar"] as String) }
+            registerRowMapper { row -> Foo(row["bar"] as String) }
          }
 
       val dataSource =
@@ -38,6 +39,8 @@ class MikromTest : FunSpec({
                Foo("baz"),
                Foo("qux"),
             )
+
+         TransactionResult.Commit
       }
    }
 })
