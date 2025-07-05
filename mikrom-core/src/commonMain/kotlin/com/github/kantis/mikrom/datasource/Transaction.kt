@@ -6,11 +6,11 @@ import com.github.kantis.mikrom.Row
 public interface Transaction {
    public fun executeInTransaction(
       query: Query,
-      vararg params: List<Any>,
+      vararg params: List<*>,
    )
 
    public fun query(
       query: Query,
-      params: List<Any> = emptyList(),
+      params: List<*> = emptyList<Any>(),
    ): List<Row>
 }

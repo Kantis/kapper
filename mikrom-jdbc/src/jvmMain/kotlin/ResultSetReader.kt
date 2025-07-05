@@ -37,6 +37,10 @@ public object ResultSetReader {
             Types.VARCHAR -> resultSet.getString(i)
             Types.BOOLEAN -> resultSet.getBoolean(i)
             Types.DATE -> resultSet.getDate(i)
+            Types.TIME -> resultSet.getTime(i)
+            Types.TIME_WITH_TIMEZONE -> TODO("TIME_WITH_TIMEZONE is not supported yet")
+            Types.TIMESTAMP -> resultSet.getTimestamp(i)
+            Types.TIMESTAMP_WITH_TIMEZONE -> TODO("TIMESTAMP_WITH_TIMEZONE is not supported yet")
             else -> error("Column $i is of unsupported type $columnType")
          }
 

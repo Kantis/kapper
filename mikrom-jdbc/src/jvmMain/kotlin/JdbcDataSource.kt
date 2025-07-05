@@ -8,11 +8,12 @@ import com.github.kantis.mikrom.datasource.Transaction
 import org.slf4j.LoggerFactory
 import java.sql.Connection
 import java.sql.PreparedStatement
+import java.time.LocalDateTime
 
 public class JdbcTransaction(private val connection: Connection) : Transaction {
    override fun executeInTransaction(
       query: Query,
-      vararg parameterLists: List<Any>,
+      vararg parameterLists: List<*>,
    ) {
       connection.prepareStatement(query.value).use { statement ->
          parameterLists.forEach { params ->
@@ -24,7 +25,7 @@ public class JdbcTransaction(private val connection: Connection) : Transaction {
 
    override fun query(
       query: Query,
-      params: List<Any>,
+      params: List<*>,
    ): List<Row> =
       connection.prepareStatement(query.value).use { statement ->
          bindParameters(statement, params)
@@ -33,7 +34,7 @@ public class JdbcTransaction(private val connection: Connection) : Transaction {
 
    private fun bindParameters(
       statement: PreparedStatement,
-      params: List<Any>,
+      params: List<*>,
    ) {
       val statementParams = statement.parameterMetaData
       require(params.count() == statementParams.parameterCount) {
@@ -49,7 +50,9 @@ public class JdbcTransaction(private val connection: Connection) : Transaction {
             is Float -> statement.setFloat(index + 1, param)
             is Boolean -> statement.setBoolean(index + 1, param)
             is ByteArray -> statement.setBytes(index + 1, param)
-            else -> error("TODO")
+            is LocalDateTime -> statement.setTimestamp(index + 1, java.sql.Timestamp.valueOf(param))
+            null -> statement.setNull(index + 1, java.sql.Types.NULL)
+            else -> error("Unsupported parameter type: ${param::class.simpleName} at index ${index + 1} with value $param")
          }
       }
    }
