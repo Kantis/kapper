@@ -8,7 +8,6 @@ include(
    ":mikrom-core",
    ":mikrom-jdbc",
    ":mikrom-r2dbc",
-   ":example",
 )
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")

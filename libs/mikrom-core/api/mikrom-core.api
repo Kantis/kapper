@@ -1,7 +1,3 @@
-public final class QueryExecution {
-	public static final field INSTANCE LQueryExecution;
-}
-
 public final class io/github/kantis/mikrom/Mikrom {
 	public static final field Companion Lio/github/kantis/mikrom/Mikrom$Companion;
 	public fun <init> (Ljava/util/Map;)V
@@ -21,11 +17,15 @@ public final class io/github/kantis/mikrom/MikromBuilder {
 public abstract interface annotation class io/github/kantis/mikrom/MikromInternal : java/lang/annotation/Annotation {
 }
 
+public final class io/github/kantis/mikrom/PrimitivesKt {
+	public static final fun getNonMappedPrimitives ()Ljava/util/Set;
+}
+
 public final class io/github/kantis/mikrom/QueriesKt {
-	public static final fun execute-v1zWpgk (Lio/github/kantis/mikrom/datasource/Transaction;Lio/github/kantis/mikrom/Mikrom;Ljava/lang/String;)V
-	public static final fun execute-vEHX32Y (Lio/github/kantis/mikrom/datasource/Transaction;Lio/github/kantis/mikrom/Mikrom;Ljava/lang/String;Ljava/util/List;)V
-	public static final fun execute-vEHX32Y (Lio/github/kantis/mikrom/datasource/Transaction;Lio/github/kantis/mikrom/Mikrom;Ljava/lang/String;[Ljava/lang/Object;)V
-	public static final fun execute-vEHX32Y (Lio/github/kantis/mikrom/datasource/Transaction;Lio/github/kantis/mikrom/Mikrom;Ljava/lang/String;[Ljava/util/List;)V
+	public static final fun execute-CQkImio (Lio/github/kantis/mikrom/datasource/Transaction;Lio/github/kantis/mikrom/Mikrom;Ljava/lang/String;Ljava/util/List;)V
+	public static final fun execute-CQkImio (Lio/github/kantis/mikrom/datasource/Transaction;Lio/github/kantis/mikrom/Mikrom;Ljava/lang/String;[Ljava/lang/Object;)V
+	public static final fun execute-CQkImio (Lio/github/kantis/mikrom/datasource/Transaction;Lio/github/kantis/mikrom/Mikrom;Ljava/lang/String;[Ljava/util/List;)V
+	public static final fun execute-lKpMjJE (Lio/github/kantis/mikrom/datasource/Transaction;Lio/github/kantis/mikrom/Mikrom;Ljava/lang/String;)V
 }
 
 public final class io/github/kantis/mikrom/Query {
@@ -46,6 +46,13 @@ public abstract interface class io/github/kantis/mikrom/RowMapper {
 	public abstract fun mapRow (Ljava/util/Map;)Ljava/lang/Object;
 }
 
+public final class io/github/kantis/mikrom/SuspendQueriesKt {
+	public static final fun execute-CQkImio (Lio/github/kantis/mikrom/datasource/SuspendingTransaction;Lio/github/kantis/mikrom/Mikrom;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static final fun execute-DOpdqmY (Lio/github/kantis/mikrom/datasource/SuspendingTransaction;Lio/github/kantis/mikrom/Mikrom;Ljava/lang/String;Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static final fun execute-DOpdqmY (Lio/github/kantis/mikrom/datasource/SuspendingTransaction;Lio/github/kantis/mikrom/Mikrom;Ljava/lang/String;Lkotlinx/coroutines/flow/Flow;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static final fun execute-DOpdqmY (Lio/github/kantis/mikrom/datasource/SuspendingTransaction;Lio/github/kantis/mikrom/Mikrom;Ljava/lang/String;[Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
 public abstract interface class io/github/kantis/mikrom/datasource/DataSource {
 	public abstract fun transaction (Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
 }
@@ -54,15 +61,42 @@ public final class io/github/kantis/mikrom/datasource/Rollback {
 	public static final field INSTANCE Lio/github/kantis/mikrom/datasource/Rollback;
 }
 
+public abstract interface class io/github/kantis/mikrom/datasource/SuspendingDataSource {
+	public abstract fun suspendingTransaction (Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class io/github/kantis/mikrom/datasource/SuspendingTransaction {
+	public abstract fun executeInTransaction-RFpYPog (Ljava/lang/String;Lkotlinx/coroutines/flow/Flow;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun query-RFpYPog (Ljava/lang/String;Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class io/github/kantis/mikrom/datasource/SuspendingTransaction$DefaultImpls {
+	public static synthetic fun query-RFpYPog$default (Lio/github/kantis/mikrom/datasource/SuspendingTransaction;Ljava/lang/String;Ljava/util/List;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
 public abstract interface class io/github/kantis/mikrom/datasource/Transaction {
-	public abstract fun executeInTransaction-tOu8PdM (Ljava/lang/String;[Ljava/util/List;)V
-	public abstract fun query-tOu8PdM (Ljava/lang/String;Ljava/util/List;)Ljava/util/List;
+	public abstract fun executeInTransaction-Mwax8gE (Ljava/lang/String;[Ljava/util/List;)V
+	public abstract fun query-Mwax8gE (Ljava/lang/String;Ljava/util/List;)Ljava/util/List;
 }
 
 public final class io/github/kantis/mikrom/datasource/Transaction$DefaultImpls {
-	public static synthetic fun query-tOu8PdM$default (Lio/github/kantis/mikrom/datasource/Transaction;Ljava/lang/String;Ljava/util/List;ILjava/lang/Object;)Ljava/util/List;
+	public static synthetic fun query-Mwax8gE$default (Lio/github/kantis/mikrom/datasource/Transaction;Ljava/lang/String;Ljava/util/List;ILjava/lang/Object;)Ljava/util/List;
+}
+
+public abstract interface class io/github/kantis/mikrom/generator/GeneratedRowMapper : io/github/kantis/mikrom/RowMapper {
+}
+
+public abstract interface annotation class io/github/kantis/mikrom/generator/Parameter : java/lang/annotation/Annotation {
+}
+
+public abstract interface annotation class io/github/kantis/mikrom/generator/QueryResult : java/lang/annotation/Annotation {
 }
 
 public abstract interface annotation class io/github/kantis/mikrom/generator/RowMapped : java/lang/annotation/Annotation {
+}
+
+public final class io/github/kantis/mikrom/internal/FindCompiledRowMapperKt {
+	public static final fun compiledRowMapper (Lkotlin/reflect/KClass;)Lio/github/kantis/mikrom/RowMapper;
+	public static final fun invokeRowMapperOnDefaultCompanion (Ljava/lang/Class;)Lio/github/kantis/mikrom/RowMapper;
 }
 

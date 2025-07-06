@@ -3,6 +3,7 @@ plugins {
    id("com.gradle.plugin-publish") version "1.1.0"
    kotlin("jvm") version libs.versions.kotlin.get()
    id("mikrom.conventions.base")
+   id("mikrom.conventions.api-validation")
 }
 
 group = "io.github.kantis.mikrom"
