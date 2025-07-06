@@ -1,24 +1,7 @@
 package com.github.kantis.mikrom
 
 import com.github.kantis.mikrom.datasource.Transaction
-import org.intellij.lang.annotations.Language
 import kotlin.collections.emptyList
-import kotlin.jvm.JvmInline
-import kotlin.reflect.KClass
-
-@JvmInline
-public value class Query(
-   @Language("SQL") public val value: String,
-)
-
-public val nonMappedPrimitives: Set<KClass<*>> = setOf(
-   String::class,
-   Int::class,
-   Long::class,
-   Float::class,
-   Double::class,
-   Boolean::class,
-)
 
 public inline fun <reified T> Mikrom.queryForSingleOrNull(query: Query): T? = null
 

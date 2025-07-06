@@ -8,6 +8,7 @@ include(
    ":mikrom-core",
    ":mikrom-compiler-plugin",
    ":mikrom-jdbc",
+   ":mikrom-r2dbc",
    ":example",
 )
 

@@ -11,13 +11,21 @@ gradlePlugin-ktlint = "12.1.2"
 gradlePlugin-testlogger = "4.0.0"
 
 kotlinBinaryCompatibilityValidator = "0.17.0"
+kotlinx-coroutines = "1.10.2"
 
 [libraries]
 
 h2 = { module = "com.h2database:h2", version = "2.3.232" }
 postgresql = { module = "org.postgresql:postgresql", version = "42.6.0" }
+r2dbc-postgresql = { module = "org.postgresql:r2dbc-postgresql", version = "1.0.7.RELEASE" }
+r2dbc-spi = { module = "io.r2dbc:r2dbc-spi", version = "1.0.0.RELEASE" }
+r2dbc-pool = { module = "io.r2dbc:r2dbc-pool", version = "1.0.2.RELEASE" }
 slf4j-api = { module = "org.slf4j:slf4j-api", version = "2.0.9" }
 logback-classic = { module = "ch.qos.logback:logback-classic", version = "1.4.11" }
+
+kotlinxCoroutinesReactor = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-reactor", version.ref = "kotlinx-coroutines" }
+kotlinxCoroutinesReactive = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-reactive", version.ref = "kotlinx-coroutines" }
+kotlinxCoroutinesCore = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 
 ## Kotest ##
 kotest-assertionsCore = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
