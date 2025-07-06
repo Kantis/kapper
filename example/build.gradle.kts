@@ -5,6 +5,9 @@ plugins {
 
 kotlin {
    compilerOptions { freeCompilerArgs.add("-Xcontext-receivers") }
+   jvmToolchain {
+      languageVersion.set(JavaLanguageVersion.of(21))
+   }
 
    sourceSets {
       jvmMain {
