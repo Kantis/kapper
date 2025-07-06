@@ -1,6 +1,6 @@
 rootProject.name = "mikrom"
 
-includeBuild("libs")
+includeBuild("mikrom")
 includeBuild("mikrom-compiler-plugin")
 includeBuild("mikrom-gradle-plugin")
 includeBuild("example")

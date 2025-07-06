@@ -1,5 +1,5 @@
 includeBuild("../build-logic")
-includeBuild("../libs")
+includeBuild("../mikrom")
 includeBuild("../mikrom-compiler-plugin")
 includeBuild("../mikrom-gradle-plugin")
 
