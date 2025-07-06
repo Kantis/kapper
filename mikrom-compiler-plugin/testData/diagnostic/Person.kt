@@ -1,4 +1,4 @@
-import com.github.kantis.mikrom.generator.RowMapped
+import io.github.kantis.mikrom.generator.RowMapped
 
 @RowMapped
 data class Person(

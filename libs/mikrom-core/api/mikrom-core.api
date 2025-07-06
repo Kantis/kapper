@@ -1,0 +1,68 @@
+public final class QueryExecution {
+	public static final field INSTANCE LQueryExecution;
+}
+
+public final class io/github/kantis/mikrom/Mikrom {
+	public static final field Companion Lio/github/kantis/mikrom/Mikrom$Companion;
+	public fun <init> (Ljava/util/Map;)V
+	public final fun getRowMappers ()Ljava/util/Map;
+}
+
+public final class io/github/kantis/mikrom/Mikrom$Companion {
+	public final fun invoke (Lkotlin/jvm/functions/Function1;)Lio/github/kantis/mikrom/Mikrom;
+}
+
+public final class io/github/kantis/mikrom/MikromBuilder {
+	public fun <init> ()V
+	public final fun build ()Lio/github/kantis/mikrom/Mikrom;
+	public final fun getRowMappers ()Ljava/util/Map;
+}
+
+public abstract interface annotation class io/github/kantis/mikrom/MikromInternal : java/lang/annotation/Annotation {
+}
+
+public final class io/github/kantis/mikrom/QueriesKt {
+	public static final fun execute-v1zWpgk (Lio/github/kantis/mikrom/datasource/Transaction;Lio/github/kantis/mikrom/Mikrom;Ljava/lang/String;)V
+	public static final fun execute-vEHX32Y (Lio/github/kantis/mikrom/datasource/Transaction;Lio/github/kantis/mikrom/Mikrom;Ljava/lang/String;Ljava/util/List;)V
+	public static final fun execute-vEHX32Y (Lio/github/kantis/mikrom/datasource/Transaction;Lio/github/kantis/mikrom/Mikrom;Ljava/lang/String;[Ljava/lang/Object;)V
+	public static final fun execute-vEHX32Y (Lio/github/kantis/mikrom/datasource/Transaction;Lio/github/kantis/mikrom/Mikrom;Ljava/lang/String;[Ljava/util/List;)V
+}
+
+public final class io/github/kantis/mikrom/Query {
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lio/github/kantis/mikrom/Query;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public abstract interface class io/github/kantis/mikrom/RowMapper {
+	public abstract fun mapRow (Ljava/util/Map;)Ljava/lang/Object;
+}
+
+public abstract interface class io/github/kantis/mikrom/datasource/DataSource {
+	public abstract fun transaction (Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+}
+
+public final class io/github/kantis/mikrom/datasource/Rollback {
+	public static final field INSTANCE Lio/github/kantis/mikrom/datasource/Rollback;
+}
+
+public abstract interface class io/github/kantis/mikrom/datasource/Transaction {
+	public abstract fun executeInTransaction-tOu8PdM (Ljava/lang/String;[Ljava/util/List;)V
+	public abstract fun query-tOu8PdM (Ljava/lang/String;Ljava/util/List;)Ljava/util/List;
+}
+
+public final class io/github/kantis/mikrom/datasource/Transaction$DefaultImpls {
+	public static synthetic fun query-tOu8PdM$default (Lio/github/kantis/mikrom/datasource/Transaction;Ljava/lang/String;Ljava/util/List;ILjava/lang/Object;)Ljava/util/List;
+}
+
+public abstract interface annotation class io/github/kantis/mikrom/generator/RowMapped : java/lang/annotation/Annotation {
+}
+

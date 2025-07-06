@@ -1,8 +1,9 @@
 [versions]
 dokka = "2.0.0"
 dokkatoo = "2.4.0"
+jvmToolchain = "21"
 
-kotlin = "2.1.20"
+kotlin = "2.1.21"
 
 kotest = "5.9.1"
 kotest-propertyArbsExtension = "2.1.2"

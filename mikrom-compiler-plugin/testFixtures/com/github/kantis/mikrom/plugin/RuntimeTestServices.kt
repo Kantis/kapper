@@ -1,4 +1,4 @@
-package com.github.kantis.mikrom.plugin
+package io.github.kantis.mikrom.plugin
 
 import org.jetbrains.kotlin.cli.jvm.config.addJvmClasspathRoot
 import org.jetbrains.kotlin.config.CompilerConfiguration
@@ -13,7 +13,10 @@ private val mikromRuntimeClasspath =
       ?: error("Unable to get a valid classpath from 'mikromRuntime.classpath' property")
 
 class RuntimeEnvironmentConfigurator(testServices: TestServices) : EnvironmentConfigurator(testServices) {
-   override fun configureCompilerConfiguration(configuration: CompilerConfiguration, module: TestModule) {
+   override fun configureCompilerConfiguration(
+      configuration: CompilerConfiguration,
+      module: TestModule,
+   ) {
       for (file in mikromRuntimeClasspath) {
          configuration.addJvmClasspathRoot(file)
       }
@@ -21,7 +24,5 @@ class RuntimeEnvironmentConfigurator(testServices: TestServices) : EnvironmentCo
 }
 
 class RuntimeRuntimeClassPathProvider(testServices: TestServices) : RuntimeClasspathProvider(testServices) {
-   override fun runtimeClassPaths(module: TestModule): List<File> {
-      return mikromRuntimeClasspath
-   }
+   override fun runtimeClassPaths(module: TestModule): List<File> = mikromRuntimeClasspath
 }

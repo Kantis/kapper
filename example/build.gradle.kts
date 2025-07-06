@@ -1,15 +1,20 @@
 plugins {
-   kotlin("multiplatform")
+   id("mikrom.conventions.lang.kotlin-multiplatform-jvm")
+   id("io.github.kantis.mikrom.gradle-plugin")
 }
 
 kotlin {
-   jvm()
+   compilerOptions { freeCompilerArgs.add("-Xcontext-receivers") }
+   jvmToolchain {
+      languageVersion.set(JavaLanguageVersion.of(21))
+   }
 
    sourceSets {
-      commonMain {
+      jvmMain {
          dependencies {
-            implementation(projects.mikromCore)
-            implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.2")
+            implementation(libs.h2)
+            implementation("io.github.kantis.mikrom:mikrom-core:0.1.0-SNAPSHOT")
+            implementation("io.github.kantis.mikrom:mikrom-jdbc:0.1.0-SNAPSHOT")
          }
       }
    }
@@ -17,8 +22,4 @@ kotlin {
 
 tasks.named("compileKotlinJvm").configure {
    outputs.upToDateWhen { false }
-}
-
-dependencies {
-   kotlinCompilerPluginClasspath(projects.mikromCompilerPlugin)
 }

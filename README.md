@@ -4,6 +4,7 @@ Mikrom is inspired by [Dapper](https://github.com/DapperLib/Dapper), a popular m
 ## Philosophy
 - No automated tracking of changes
 - No reflection-based mapping
+  - Note that reflection might be necessary on _some_ platforms, however. See for instance [KxS](https://github.com/search?q=repo:Kotlin/kotlinx.serialization%20findAssociatedObject&type=code) which uses reflection to find serializers on K/N and K/JS.
 - Provide convenient DSLs, so the explicitness doesn't become tedious
 - Explicit transaction management is mandatory
 - Multiplatform design, with JDBC and R2DBC (to-be-added) support added by separate modules.

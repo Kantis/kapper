@@ -1,9 +1,19 @@
 plugins {
-   kotlin("jvm")
+   base
+   kotlin("jvm") version libs.versions.kotlin.get()
    `java-test-fixtures`
 }
 
+group = "io.github.kantis.mikrom"
+version = "0.1.0-SNAPSHOT"
+
 kotlin {
+   explicitApi()
+
+   jvmToolchain {
+      languageVersion.set(JavaLanguageVersion.of(21))
+   }
+
    compilerOptions {
       optIn.add("org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi")
       optIn.add("org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI")
@@ -35,7 +45,7 @@ dependencies {
    testFixturesApi(kotlin("compiler-internal-test-framework"))
    testFixturesApi(kotlin("compiler"))
 
-   mikromRuntimeClasspath(projects.mikromCore)
+   mikromRuntimeClasspath("io.github.kantis.mikrom:mikrom-core")
 
    testRuntimeOnly(kotlin("reflect"))
    testRuntimeOnly(kotlin("test"))
@@ -68,7 +78,7 @@ tasks.withType<Test> {
 
 val generateTests by tasks.registering(JavaExec::class) {
    classpath = sourceSets.testFixtures.get().runtimeClasspath
-   mainClass.set("com.github.kantis.mikrom.plugin.GenerateTestsKt")
+   mainClass.set("io.github.kantis.mikrom.plugin.GenerateTestsKt")
    workingDir = rootDir
 
    inputs.dir(layout.projectDirectory.dir("testData"))
@@ -82,7 +92,10 @@ tasks.compileTestKotlin {
    dependsOn(generateTests)
 }
 
-fun Test.setLibraryProperty(propName: String, jarName: String) {
+fun Test.setLibraryProperty(
+   propName: String,
+   jarName: String,
+) {
    val path = project.configurations
       .testRuntimeClasspath.get()
       .files

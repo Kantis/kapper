@@ -33,7 +33,3 @@ tasks.withType<KotlinCompile>().configureEach {
 tasks.withType<Test>().configureEach {
    useJUnitPlatform()
 }
-
-kotlinDslPluginOptions {
-   jvmTarget.set(buildLogicJvmTarget)
-}

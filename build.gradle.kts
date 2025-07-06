@@ -30,3 +30,7 @@ idea {
       )
    }
 }
+
+tasks.named("check").configure {
+   dependsOn(gradle.includedBuilds.map { it.task(":check") })
+}

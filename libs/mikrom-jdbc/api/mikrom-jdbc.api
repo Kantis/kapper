@@ -1,0 +1,20 @@
+public final class io/github/kantis/mikrom/jdbc/JdbcDataSource : io/github/kantis/mikrom/datasource/DataSource {
+	public static final field Companion Lio/github/kantis/mikrom/jdbc/JdbcDataSource$Companion;
+	public fun <init> (Ljavax/sql/DataSource;)V
+	public fun transaction (Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+}
+
+public final class io/github/kantis/mikrom/jdbc/JdbcDataSource$Companion {
+}
+
+public final class io/github/kantis/mikrom/jdbc/JdbcTransaction : io/github/kantis/mikrom/datasource/Transaction {
+	public fun <init> (Ljava/sql/Connection;)V
+	public fun executeInTransaction-tOu8PdM (Ljava/lang/String;[Ljava/util/List;)V
+	public fun query-tOu8PdM (Ljava/lang/String;Ljava/util/List;)Ljava/util/List;
+}
+
+public final class io/github/kantis/mikrom/jdbc/ResultSetReader {
+	public static final field INSTANCE Lio/github/kantis/mikrom/jdbc/ResultSetReader;
+	public final fun loadResultSet (Ljava/sql/ResultSet;)Ljava/util/List;
+}
+

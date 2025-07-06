@@ -1,15 +1,15 @@
-public final class com/github/kantis/mikrom/plugin/MikromCompilerPluginRegistrar : org/jetbrains/kotlin/compiler/plugin/CompilerPluginRegistrar {
+public final class io/github/kantis/mikrom/plugin/MikromCompilerPluginRegistrar : org/jetbrains/kotlin/compiler/plugin/CompilerPluginRegistrar {
 	public fun <init> ()V
 	public fun getSupportsK2 ()Z
 	public fun registerExtensions (Lorg/jetbrains/kotlin/compiler/plugin/CompilerPluginRegistrar$ExtensionStorage;Lorg/jetbrains/kotlin/config/CompilerConfiguration;)V
 }
 
-public final class com/github/kantis/mikrom/plugin/MikromGenerateRowMapperClassKey : org/jetbrains/kotlin/GeneratedDeclarationKey {
+public final class io/github/kantis/mikrom/plugin/MikromGenerateRowMapperClassKey : org/jetbrains/kotlin/GeneratedDeclarationKey {
 	public fun <init> (Lorg/jetbrains/kotlin/fir/symbols/impl/FirClassSymbol;Lorg/jetbrains/kotlin/fir/types/ConeClassLikeType;)V
 	public final fun component1 ()Lorg/jetbrains/kotlin/fir/symbols/impl/FirClassSymbol;
 	public final fun component2 ()Lorg/jetbrains/kotlin/fir/types/ConeClassLikeType;
-	public final fun copy (Lorg/jetbrains/kotlin/fir/symbols/impl/FirClassSymbol;Lorg/jetbrains/kotlin/fir/types/ConeClassLikeType;)Lcom/github/kantis/mikrom/plugin/MikromGenerateRowMapperClassKey;
-	public static synthetic fun copy$default (Lcom/github/kantis/mikrom/plugin/MikromGenerateRowMapperClassKey;Lorg/jetbrains/kotlin/fir/symbols/impl/FirClassSymbol;Lorg/jetbrains/kotlin/fir/types/ConeClassLikeType;ILjava/lang/Object;)Lcom/github/kantis/mikrom/plugin/MikromGenerateRowMapperClassKey;
+	public final fun copy (Lorg/jetbrains/kotlin/fir/symbols/impl/FirClassSymbol;Lorg/jetbrains/kotlin/fir/types/ConeClassLikeType;)Lio/github/kantis/mikrom/plugin/MikromGenerateRowMapperClassKey;
+	public static synthetic fun copy$default (Lio/github/kantis/mikrom/plugin/MikromGenerateRowMapperClassKey;Lorg/jetbrains/kotlin/fir/symbols/impl/FirClassSymbol;Lorg/jetbrains/kotlin/fir/types/ConeClassLikeType;ILjava/lang/Object;)Lio/github/kantis/mikrom/plugin/MikromGenerateRowMapperClassKey;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getOwnerClassSymbol ()Lorg/jetbrains/kotlin/fir/symbols/impl/FirClassSymbol;
 	public final fun getRowMapperType ()Lorg/jetbrains/kotlin/fir/types/ConeClassLikeType;
@@ -17,15 +17,15 @@ public final class com/github/kantis/mikrom/plugin/MikromGenerateRowMapperClassK
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class com/github/kantis/mikrom/plugin/MikromGenerateRowMapperKey : org/jetbrains/kotlin/GeneratedDeclarationKey {
-	public static final field INSTANCE Lcom/github/kantis/mikrom/plugin/MikromGenerateRowMapperKey;
+public final class io/github/kantis/mikrom/plugin/MikromGenerateRowMapperKey : org/jetbrains/kotlin/GeneratedDeclarationKey {
+	public static final field INSTANCE Lio/github/kantis/mikrom/plugin/MikromGenerateRowMapperKey;
 	public fun equals (Ljava/lang/Object;)Z
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class com/github/kantis/mikrom/plugin/fir/MikromFirDeclarationGenerationExtension : org/jetbrains/kotlin/fir/extensions/FirDeclarationGenerationExtension {
-	public static final field Companion Lcom/github/kantis/mikrom/plugin/fir/MikromFirDeclarationGenerationExtension$Companion;
+public final class io/github/kantis/mikrom/plugin/fir/MikromFirDeclarationGenerationExtension : org/jetbrains/kotlin/fir/extensions/FirDeclarationGenerationExtension {
+	public static final field Companion Lio/github/kantis/mikrom/plugin/fir/MikromFirDeclarationGenerationExtension$Companion;
 	public fun <init> (Lorg/jetbrains/kotlin/fir/FirSession;)V
 	public fun generateConstructors (Lorg/jetbrains/kotlin/fir/extensions/DeclarationGenerationContext$Member;)Ljava/util/List;
 	public fun generateFunctions (Lorg/jetbrains/kotlin/name/CallableId;Lorg/jetbrains/kotlin/fir/extensions/DeclarationGenerationContext$Member;)Ljava/util/List;
@@ -36,26 +36,26 @@ public final class com/github/kantis/mikrom/plugin/fir/MikromFirDeclarationGener
 	public fun registerPredicates (Lorg/jetbrains/kotlin/fir/extensions/FirDeclarationPredicateRegistrar;)V
 }
 
-public final class com/github/kantis/mikrom/plugin/fir/MikromFirDeclarationGenerationExtension$Companion {
+public final class io/github/kantis/mikrom/plugin/fir/MikromFirDeclarationGenerationExtension$Companion {
 }
 
-public final class com/github/kantis/mikrom/plugin/fir/MikromFirExtensionRegistrar : org/jetbrains/kotlin/fir/extensions/FirExtensionRegistrar {
+public final class io/github/kantis/mikrom/plugin/fir/MikromFirExtensionRegistrar : org/jetbrains/kotlin/fir/extensions/FirExtensionRegistrar {
 	public fun <init> ()V
 }
 
-public final class com/github/kantis/mikrom/plugin/ir/MikromIrGenerationExtension : org/jetbrains/kotlin/backend/common/extensions/IrGenerationExtension {
+public final class io/github/kantis/mikrom/plugin/ir/MikromIrGenerationExtension : org/jetbrains/kotlin/backend/common/extensions/IrGenerationExtension {
 	public fun <init> ()V
 	public fun generate (Lorg/jetbrains/kotlin/ir/declarations/IrModuleFragment;Lorg/jetbrains/kotlin/backend/common/extensions/IrPluginContext;)V
 }
 
-public final class com/github/kantis/mikrom/plugin/ir/MikromIrVisitor : org/jetbrains/kotlin/ir/visitors/IrVisitorVoid {
-	public static final field Companion Lcom/github/kantis/mikrom/plugin/ir/MikromIrVisitor$Companion;
+public final class io/github/kantis/mikrom/plugin/ir/MikromIrVisitor : org/jetbrains/kotlin/ir/visitors/IrVisitorVoid {
+	public static final field Companion Lio/github/kantis/mikrom/plugin/ir/MikromIrVisitor$Companion;
 	public fun <init> (Lorg/jetbrains/kotlin/backend/common/extensions/IrPluginContext;)V
 	public fun visitConstructor (Lorg/jetbrains/kotlin/ir/declarations/IrConstructor;)V
 	public fun visitElement (Lorg/jetbrains/kotlin/ir/IrElement;)V
 	public fun visitSimpleFunction (Lorg/jetbrains/kotlin/ir/declarations/IrSimpleFunction;)V
 }
 
-public final class com/github/kantis/mikrom/plugin/ir/MikromIrVisitor$Companion {
+public final class io/github/kantis/mikrom/plugin/ir/MikromIrVisitor$Companion {
 }
 
