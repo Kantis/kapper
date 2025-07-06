@@ -1,3 +1,5 @@
+package io.github.kantis.mikrom.r2dbc
+
 import io.github.kantis.mikrom.Query
 import io.github.kantis.mikrom.Row
 import io.github.kantis.mikrom.datasource.SuspendingTransaction
