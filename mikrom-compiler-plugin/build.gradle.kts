@@ -1,5 +1,6 @@
 plugins {
-   base
+   id("mikrom.conventions.base")
+   id("mikrom.conventions.api-validation")
    kotlin("jvm") version libs.versions.kotlin.get()
    `java-test-fixtures`
 }

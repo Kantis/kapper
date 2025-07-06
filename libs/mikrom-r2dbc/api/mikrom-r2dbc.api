@@ -1,0 +1,11 @@
+public final class PooledR2dbcDataSource : io/github/kantis/mikrom/datasource/SuspendingDataSource {
+	public fun <init> (Lio/r2dbc/pool/ConnectionPool;)V
+	public fun suspendingTransaction (Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class R2dbcTransaction : io/github/kantis/mikrom/datasource/SuspendingTransaction {
+	public fun <init> (Lio/r2dbc/spi/Connection;)V
+	public fun executeInTransaction-RFpYPog (Ljava/lang/String;Lkotlinx/coroutines/flow/Flow;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun query-RFpYPog (Ljava/lang/String;Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+

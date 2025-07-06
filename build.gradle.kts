@@ -31,6 +31,26 @@ idea {
    }
 }
 
-tasks.named("check").configure {
-   dependsOn(gradle.includedBuilds.map { it.task(":check") })
+tasks {
+   val apiCheck by registering {
+      dependsOn(gradle.includedBuild("libs").task(":mikrom-core:apiCheck"))
+      dependsOn(gradle.includedBuild("libs").task(":mikrom-jdbc:apiCheck"))
+      dependsOn(gradle.includedBuild("libs").task(":mikrom-r2dbc:apiCheck"))
+      dependsOn(gradle.includedBuild("mikrom-compiler-plugin").task(":apiCheck"))
+      dependsOn(gradle.includedBuild("mikrom-gradle-plugin").task(":apiCheck"))
+   }
+
+
+   named("check").configure {
+      dependsOn(gradle.includedBuilds.map { it.task(":check") })
+      dependsOn(apiCheck)
+   }
+
+   register("apiDump").configure {
+      dependsOn(gradle.includedBuild("libs").task(":mikrom-core:apiDump"))
+      dependsOn(gradle.includedBuild("libs").task(":mikrom-jdbc:apiDump"))
+      dependsOn(gradle.includedBuild("libs").task(":mikrom-r2dbc:apiDump"))
+      dependsOn(gradle.includedBuild("mikrom-compiler-plugin").task(":apiDump"))
+      dependsOn(gradle.includedBuild("mikrom-gradle-plugin").task(":apiDump"))
+   }
 }
