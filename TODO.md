@@ -2,6 +2,7 @@
 ## Feature completeness
 - [ ] Add `ParameterMapper` (see below)
   - Turns out named parameters are not possible to do with plain JDBC. On hold for now.
+    - But it is supported out-of-the-box in R2dbc!
   - [ ] Compiler plugin support for generation of parameter mappers
 
 ### Paused until requested or someone wants to build it

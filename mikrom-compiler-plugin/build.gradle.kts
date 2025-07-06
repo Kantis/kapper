@@ -1,6 +1,7 @@
 plugins {
    id("mikrom.conventions.lang.kotlin-jvm")
    id("mikrom.conventions.api-validation")
+   id("mikrom.conventions.publishing.maven-publish")
    `java-test-fixtures`
 }
 
@@ -39,7 +40,7 @@ dependencies {
    testFixturesApi(kotlin("compiler-internal-test-framework"))
    testFixturesApi(kotlin("compiler"))
 
-   mikromRuntimeClasspath("io.github.kantis:mikrom-core")
+   mikromRuntimeClasspath(libs.mikrom.core)
 
    testRuntimeOnly(kotlin("reflect"))
    testRuntimeOnly(kotlin("test"))

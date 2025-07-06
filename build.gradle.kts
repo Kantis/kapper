@@ -40,6 +40,14 @@ tasks {
       dependsOn(gradle.includedBuild("mikrom-gradle-plugin").task(":apiCheck"))
    }
 
+   register("publishToMavenLocal").configure {
+      dependsOn(gradle.includedBuild("mikrom").task(":mikrom-core:publishToMavenLocal"))
+      dependsOn(gradle.includedBuild("mikrom").task(":mikrom-jdbc:publishToMavenLocal"))
+      dependsOn(gradle.includedBuild("mikrom").task(":mikrom-r2dbc:publishToMavenLocal"))
+      dependsOn(gradle.includedBuild("mikrom-compiler-plugin").task(":publishToMavenLocal"))
+      dependsOn(gradle.includedBuild("mikrom-gradle-plugin").task(":publishPluginMavenPublicationToMavenLocal"))
+   }
+
    named("check").configure {
       dependsOn(gradle.includedBuilds.map { it.task(":check") })
       dependsOn(apiCheck)

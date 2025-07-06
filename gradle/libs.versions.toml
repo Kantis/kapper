@@ -4,6 +4,7 @@ dokkatoo = "2.4.0"
 jvmToolchain = "21"
 
 kotlin = "2.1.21"
+mikrom = "0.1.0-SNAPSHOT"
 
 kotest = "5.9.1"
 kotest-propertyArbsExtension = "2.1.2"
@@ -15,6 +16,11 @@ kotlinBinaryCompatibilityValidator = "0.17.0"
 kotlinx-coroutines = "1.10.2"
 
 [libraries]
+
+## Mikrom
+mikrom-core = { module = "io.github.kantis:mikrom-core", version.ref = "mikrom" }
+mikrom-jdbc = { module = "io.github.kantis:mikrom-jdbc", version.ref = "mikrom" }
+mikrom-r2dbc = { module = "io.github.kantis:mikrom-r2dbc", version.ref = "mikrom" }
 
 h2 = { module = "com.h2database:h2", version = "2.3.232" }
 postgresql = { module = "org.postgresql:postgresql", version = "42.6.0" }

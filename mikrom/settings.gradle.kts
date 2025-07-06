@@ -1,15 +1,12 @@
-apply(from = "../build-logic/repositories.gradle.kts")
-
 includeBuild("../build-logic")
+
+apply(from = "../build-logic/repositories.gradle.kts")
 
 include(
    ":mikrom-core",
    ":mikrom-jdbc",
    ":mikrom-r2dbc",
 )
-
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
 
 dependencyResolutionManagement {
    versionCatalogs {
