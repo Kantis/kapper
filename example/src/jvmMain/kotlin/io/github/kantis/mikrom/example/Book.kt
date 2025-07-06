@@ -1,9 +1,9 @@
 import io.github.kantis.mikrom.generator.RowMapped
 
 @RowMapped
-data class Book(val author: String, val title: String, val numberOfPages: Int)
+public data class Book(val author: String, val title: String, val numberOfPages: Int)
 
-fun main() {
+public fun main() {
    val book = Book.RowMapper.mapRow(
       mapOf(
          "author" to "JRR Tolkien",

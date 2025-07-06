@@ -12,7 +12,6 @@ kotlin {
             implementation(libs.h2)
             implementation("io.github.kantis.mikrom:mikrom-core:0.1.0-SNAPSHOT")
             implementation("io.github.kantis.mikrom:mikrom-jdbc:0.1.0-SNAPSHOT")
-            implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.2")
          }
       }
    }
