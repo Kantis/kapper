@@ -1,5 +1,5 @@
 plugins {
-   kotlin("jvm")
+   kotlin("jvm") version "2.1.20"
    `java-test-fixtures`
 }
 
@@ -35,7 +35,7 @@ dependencies {
    testFixturesApi(kotlin("compiler-internal-test-framework"))
    testFixturesApi(kotlin("compiler"))
 
-   mikromRuntimeClasspath(projects.mikromCore)
+   mikromRuntimeClasspath("io.github.kantis.mikrom:mikrom-core:${project.version}")
 
    testRuntimeOnly(kotlin("reflect"))
    testRuntimeOnly(kotlin("test"))

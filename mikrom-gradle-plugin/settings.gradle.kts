@@ -1,0 +1,1 @@
+includeBuild("../mikrom-compiler-plugin")
