@@ -15,7 +15,7 @@ public class MikromGradlePlugin : KotlinCompilerPluginSupportPlugin {
 
    override fun isApplicable(kotlinCompilation: KotlinCompilation<*>): Boolean = true
 
-   override fun getCompilerPluginId(): String = "1"
+   override fun getCompilerPluginId(): String = "mikrom"
 
    override fun getPluginArtifact(): SubpluginArtifact =
       SubpluginArtifact(
