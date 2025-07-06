@@ -13,8 +13,8 @@ kotlin {
       jvmMain {
          dependencies {
             implementation(libs.h2)
-            implementation("io.github.kantis.mikrom:mikrom-core:0.1.0-SNAPSHOT")
-            implementation("io.github.kantis.mikrom:mikrom-jdbc:0.1.0-SNAPSHOT")
+            implementation("io.github.kantis:mikrom-core:0.1.0-SNAPSHOT")
+            implementation("io.github.kantis:mikrom-jdbc:0.1.0-SNAPSHOT")
          }
       }
    }

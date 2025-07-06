@@ -108,7 +108,7 @@ tasks.withType<AbstractPublishToMaven>().configureEach {
    mustRunAfter(signingTasks)
 
    // use a val for the GAV to avoid Gradle Configuration Cache issues
-   val publicationGAV = publication?.run { "io.github.kantis.mikrom:$artifactId:$version" }
+   val publicationGAV = publication?.run { "io.github.kantis:$artifactId:$version" }
 
    doLast {
       if (publicationGAV != null) {

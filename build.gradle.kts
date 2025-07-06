@@ -4,7 +4,7 @@ plugins {
    idea
 }
 
-group = "io.github.kantis.mikrom"
+group = "io.github.kantis"
 version = "0.1.0-SNAPSHOT"
 
 idea {

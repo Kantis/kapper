@@ -5,7 +5,7 @@ plugins {
    id("mikrom.conventions.api-validation")
 }
 
-group = "io.github.kantis.mikrom"
+group = "io.github.kantis"
 
 dependencies {
    implementation(kotlin("gradle-plugin-api"))
@@ -17,8 +17,8 @@ gradlePlugin {
    plugins {
       create("mikromGradlePlugin") {
          id = "io.github.kantis.mikrom.gradle-plugin"
-         displayName = "Kotlin Power Assertion Plugin"
-         description = "Mikrom Gradle Plugin "
+         displayName = "Mikrom Plugin"
+         description = "Mikrom Gradle plugin for Kotlin. Generates JDBC/R2DBC row- and parameter-mappers."
          implementationClass = "io.github.kantis.mikrom.gradle.MikromGradlePlugin"
          tags.set(listOf("kotlin", "mikrom"))
       }

@@ -4,7 +4,7 @@ plugins {
    `java-test-fixtures`
 }
 
-group = "io.github.kantis.mikrom"
+group = "io.github.kantis"
 version = "0.1.0-SNAPSHOT"
 
 kotlin {
@@ -39,7 +39,7 @@ dependencies {
    testFixturesApi(kotlin("compiler-internal-test-framework"))
    testFixturesApi(kotlin("compiler"))
 
-   mikromRuntimeClasspath("io.github.kantis.mikrom:mikrom-core")
+   mikromRuntimeClasspath("io.github.kantis:mikrom-core")
 
    testRuntimeOnly(kotlin("reflect"))
    testRuntimeOnly(kotlin("test"))
