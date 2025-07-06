@@ -1,7 +1,7 @@
-includeBuild("../mikrom-compiler-plugin")
+includeBuild("../libs")
 apply(from = "../build-logic/repositories.gradle.kts")
-includeBuild("../build-logic")
 
+includeBuild("../build-logic")
 dependencyResolutionManagement {
    versionCatalogs {
       create("libs") {

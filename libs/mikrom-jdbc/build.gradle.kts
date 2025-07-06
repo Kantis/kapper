@@ -18,10 +18,6 @@ kotlin {
          jvmMain {
             dependencies {
                api(projects.mikromCore)
-               api(libs.r2dbc.pool)
-               // Probably not needed.. keeping it around for now
-//               implementation(libs.kotlinxCoroutinesReactor)
-               implementation(libs.kotlinxCoroutinesReactive)
                implementation(kotlin("reflect"))
                implementation(libs.slf4j.api)
             }
@@ -30,8 +26,8 @@ kotlin {
          jvmTest {
             dependencies {
                implementation(libs.kotest.runnerJunit5)
-//               implementation(libs.h2)
-               implementation(libs.r2dbc.postgresql)
+               implementation(libs.h2)
+               implementation(libs.postgresql)
                implementation(libs.logback.classic)
                implementation(libs.kotestExtensions.testcontainers)
                implementation(libs.testcontainers.postgresql)
@@ -40,8 +36,4 @@ kotlin {
          }
       }
    }
-}
-
-dependencies {
-   kotlinCompilerPluginClasspath(projects.mikromCompilerPlugin)
 }

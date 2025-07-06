@@ -35,7 +35,7 @@ dependencies {
    testFixturesApi(kotlin("compiler-internal-test-framework"))
    testFixturesApi(kotlin("compiler"))
 
-   mikromRuntimeClasspath("io.github.kantis.mikrom:mikrom-core:${project.version}")
+   mikromRuntimeClasspath("io.github.kantis.mikrom:mikrom-core")
 
    testRuntimeOnly(kotlin("reflect"))
    testRuntimeOnly(kotlin("test"))
@@ -82,7 +82,10 @@ tasks.compileTestKotlin {
    dependsOn(generateTests)
 }
 
-fun Test.setLibraryProperty(propName: String, jarName: String) {
+fun Test.setLibraryProperty(
+   propName: String,
+   jarName: String,
+) {
    val path = project.configurations
       .testRuntimeClasspath.get()
       .files
