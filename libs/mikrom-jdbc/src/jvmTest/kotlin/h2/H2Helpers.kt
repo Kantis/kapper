@@ -1,8 +1,8 @@
-package com.github.kantis.mikrom.jdbc.h2
+package io.github.kantis.mikrom.jdbc.h2
 
-import com.github.kantis.mikrom.jdbc.JdbcDataSource
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
+import io.github.kantis.mikrom.jdbc.JdbcDataSource
 import org.h2.Driver
 import java.sql.DriverManager
 

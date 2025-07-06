@@ -1,7 +1,7 @@
-package com.github.kantis.mikrom.plugin
+package io.github.kantis.mikrom.plugin
 
-import com.github.kantis.mikrom.plugin.fir.MikromFirExtensionRegistrar
-import com.github.kantis.mikrom.plugin.ir.MikromIrGenerationExtension
+import io.github.kantis.mikrom.plugin.fir.MikromFirExtensionRegistrar
+import io.github.kantis.mikrom.plugin.ir.MikromIrGenerationExtension
 import org.jetbrains.kotlin.backend.common.extensions.IrGenerationExtension
 import org.jetbrains.kotlin.compiler.plugin.CompilerPluginRegistrar
 import org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi

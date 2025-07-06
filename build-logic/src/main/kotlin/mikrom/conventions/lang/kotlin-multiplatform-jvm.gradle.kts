@@ -10,8 +10,6 @@ val mikromSettings = extensions.getByType<MikromBuildLogicSettings>()
 
 if (mikromSettings.enableKotlinJvm.get()) {
    kotlin {
-      jvm {
-         withJava()
-      }
+      jvm()
    }
 }

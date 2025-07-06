@@ -1,8 +1,8 @@
-package com.github.kantis.mikrom.jdbc
+package io.github.kantis.mikrom.jdbc
 
-import com.github.kantis.mikrom.Query
-import com.github.kantis.mikrom.Row
-import com.github.kantis.mikrom.datasource.Transaction
+import io.github.kantis.mikrom.Query
+import io.github.kantis.mikrom.Row
+import io.github.kantis.mikrom.datasource.Transaction
 import java.sql.Connection
 import java.sql.PreparedStatement
 import java.sql.Timestamp
@@ -11,8 +11,8 @@ import java.time.LocalDateTime
 
 public class JdbcTransaction(private val connection: Connection) : Transaction {
    override fun executeInTransaction(
-       query: Query,
-       vararg parameterLists: List<*>,
+      query: Query,
+      vararg parameterLists: List<*>,
    ) {
       connection.prepareStatement(query.value).use { statement ->
          parameterLists.forEach { params ->
@@ -23,8 +23,8 @@ public class JdbcTransaction(private val connection: Connection) : Transaction {
    }
 
    override fun query(
-       query: Query,
-       params: List<*>,
+      query: Query,
+      params: List<*>,
    ): List<Row> =
       connection.prepareStatement(query.value).use { statement ->
          bindParameters(statement, params)
@@ -32,8 +32,8 @@ public class JdbcTransaction(private val connection: Connection) : Transaction {
       }
 
    private fun bindParameters(
-       statement: PreparedStatement,
-       params: List<*>,
+      statement: PreparedStatement,
+      params: List<*>,
    ) {
       val statementParams = statement.parameterMetaData
       require(params.count() == statementParams.parameterCount) {

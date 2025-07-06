@@ -1,11 +1,11 @@
-import com.github.kantis.mikrom.datasource.Rollback
-import com.github.kantis.mikrom.datasource.SuspendingDataSource
-import com.github.kantis.mikrom.datasource.SuspendingTransaction
+import io.github.kantis.mikrom.datasource.Rollback
+import io.github.kantis.mikrom.datasource.SuspendingDataSource
+import io.github.kantis.mikrom.datasource.SuspendingTransaction
 import io.r2dbc.pool.ConnectionPool
 import kotlinx.coroutines.reactive.awaitSingle
 import org.slf4j.LoggerFactory
 
-public class PooledR2dbcDataSource(private val underlyingConnectionPool: ConnectionPool): SuspendingDataSource{
+public class PooledR2dbcDataSource(private val underlyingConnectionPool: ConnectionPool) : SuspendingDataSource {
    override suspend fun <T> suspendingTransaction(block: suspend SuspendingTransaction.() -> T): T {
       val connection = underlyingConnectionPool.create().awaitSingle()
       connection.isAutoCommit = false
@@ -41,4 +41,3 @@ public class PooledR2dbcDataSource(private val underlyingConnectionPool: Connect
       private val logger = LoggerFactory.getLogger(PooledR2dbcDataSource::class.java)
    }
 }
-

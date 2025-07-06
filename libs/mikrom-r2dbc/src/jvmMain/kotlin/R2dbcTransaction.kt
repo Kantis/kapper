@@ -1,6 +1,6 @@
-import com.github.kantis.mikrom.Query
-import com.github.kantis.mikrom.Row
-import com.github.kantis.mikrom.datasource.SuspendingTransaction
+import io.github.kantis.mikrom.Query
+import io.github.kantis.mikrom.Row
+import io.github.kantis.mikrom.datasource.SuspendingTransaction
 import io.r2dbc.spi.Connection
 import io.r2dbc.spi.Statement
 import kotlinx.coroutines.flow.Flow
@@ -9,7 +9,10 @@ import kotlinx.coroutines.reactive.asFlow
 import kotlinx.coroutines.reactive.awaitLast
 
 public class R2dbcTransaction(private val connection: Connection) : SuspendingTransaction {
-   override suspend fun executeInTransaction(query: Query, params: Flow<List<*>>) {
+   override suspend fun executeInTransaction(
+      query: Query,
+      params: Flow<List<*>>,
+   ) {
       val statement = connection.createStatement(query.value)
       params.collect { p ->
          bindParameters(statement, p)

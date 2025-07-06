@@ -1,7 +1,7 @@
-package com.github.kantis.mikrom.jdbc
+package io.github.kantis.mikrom.jdbc
 
-import com.github.kantis.mikrom.MikromInternal
-import com.github.kantis.mikrom.Row
+import io.github.kantis.mikrom.MikromInternal
+import io.github.kantis.mikrom.Row
 import java.sql.ResultSet
 import java.sql.Types
 

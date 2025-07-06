@@ -1,12 +1,27 @@
 plugins {
-   id("org.jetbrains.kotlin.jvm") version "2.1.20"
-   id("com.github.gmazzo.buildconfig") version "5.6.7"
+   base
+   `java-gradle-plugin`
+   id("com.gradle.plugin-publish") version "1.1.0"
+   kotlin("jvm") version libs.versions.kotlin.get()
 }
 
-buildConfig {
-   packageName(project.group.toString())
-//   buildConfigField("String", "KOTLIN_PLUGIN_ID", "\"${rootProject.extra["kotlin_plugin_id"]}\"")
-   buildConfigField("String", "KOTLIN_PLUGIN_GROUP", "\"io.github.kantis.mikrom\"")
-   buildConfigField("String", "KOTLIN_PLUGIN_NAME", "\"mikrom-compiler-plugin\"")
-   buildConfigField("String", "KOTLIN_PLUGIN_VERSION", "\"0.1.0-SNAPSHOT\"")
+group = "io.github.kantis.mikrom"
+
+dependencies {
+   implementation(kotlin("stdlib"))
+   implementation(kotlin("gradle-plugin-api"))
+}
+
+gradlePlugin {
+   website.set("https://github.com/kantis/mikrom")
+   vcsUrl.set("https://github.com/kantis/mikrom.git")
+   plugins {
+      create("mikromGradlePlugin") {
+         id = "io.github.kantis.mikrom.gradle-plugin"
+         displayName = "Kotlin Power Assertion Plugin"
+         description = "Mikrom Gradle Plugin "
+         implementationClass = "io.github.kantis.mikrom.gradle.MikromGradlePlugin"
+         tags.set(listOf("kotlin", "mikrom"))
+      }
+   }
 }

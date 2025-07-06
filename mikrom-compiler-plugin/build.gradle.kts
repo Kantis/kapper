@@ -1,7 +1,11 @@
 plugins {
-   kotlin("jvm") version "2.1.20"
+   base
+   kotlin("jvm") version libs.versions.kotlin.get()
    `java-test-fixtures`
 }
+
+group = "io.github.kantis.mikrom"
+version = "0.1.0-SNAPSHOT"
 
 kotlin {
    compilerOptions {
@@ -35,7 +39,7 @@ dependencies {
    testFixturesApi(kotlin("compiler-internal-test-framework"))
    testFixturesApi(kotlin("compiler"))
 
-   mikromRuntimeClasspath("io.github.kantis.mikrom:mikrom-core")
+//   mikromRuntimeClasspath("io.github.kantis.mikrom:mikrom-core")
 
    testRuntimeOnly(kotlin("reflect"))
    testRuntimeOnly(kotlin("test"))
@@ -68,7 +72,7 @@ tasks.withType<Test> {
 
 val generateTests by tasks.registering(JavaExec::class) {
    classpath = sourceSets.testFixtures.get().runtimeClasspath
-   mainClass.set("com.github.kantis.mikrom.plugin.GenerateTestsKt")
+   mainClass.set("io.github.kantis.mikrom.plugin.GenerateTestsKt")
    workingDir = rootDir
 
    inputs.dir(layout.projectDirectory.dir("testData"))

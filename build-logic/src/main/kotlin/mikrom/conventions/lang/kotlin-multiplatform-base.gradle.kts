@@ -2,9 +2,7 @@ package mikrom.conventions.lang
 
 import mikrom.conventions.MikromBuildLogicSettings
 import org.gradle.configurationcache.extensions.capitalized
-import org.gradle.kotlin.dsl.support.kotlinCompilerOptions
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
-import org.jetbrains.kotlin.gradle.plugin.KotlinTarget
 import org.jetbrains.kotlin.gradle.targets.jvm.KotlinJvmTarget
 import org.jetbrains.kotlin.gradle.testing.KotlinTaskTestRun
 
@@ -29,7 +27,7 @@ kotlin {
 
    sourceSets {
       all {
-         languageSettings.optIn("com.github.kantis.mikrom.MikromInternal")
+         languageSettings.optIn("io.github.kantis.mikrom.MikromInternal")
          languageSettings.optIn("kotlin.RequiresOptIn")
       }
    }

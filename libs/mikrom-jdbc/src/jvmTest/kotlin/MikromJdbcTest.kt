@@ -1,10 +1,10 @@
-package com.github.kantis.mikrom.jdbc
+package io.github.kantis.mikrom.jdbc
 
-import com.github.kantis.mikrom.Mikrom
-import com.github.kantis.mikrom.Query
-import com.github.kantis.mikrom.execute
-import com.github.kantis.mikrom.jdbc.h2.prepareH2Database
-import com.github.kantis.mikrom.queryFor
+import io.github.kantis.mikrom.Mikrom
+import io.github.kantis.mikrom.Query
+import io.github.kantis.mikrom.execute
+import io.github.kantis.mikrom.jdbc.h2.prepareH2Database
+import io.github.kantis.mikrom.queryFor
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 

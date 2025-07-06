@@ -1,4 +1,4 @@
-package com.github.kantis.mikrom.plugin
+package io.github.kantis.mikrom.plugin
 
 import org.jetbrains.kotlin.test.builders.TestConfigurationBuilder
 import org.jetbrains.kotlin.test.directives.CodegenTestDirectives.IGNORE_DEXING
@@ -8,13 +8,11 @@ import org.jetbrains.kotlin.test.runners.codegen.AbstractFirLightTreeBlackBoxCod
 import org.jetbrains.kotlin.test.services.KotlinStandardLibrariesPathProvider
 
 open class AbstractBoxTest : AbstractFirLightTreeBlackBoxCodegenTest() {
-   override fun createKotlinStandardLibrariesPathProvider(): KotlinStandardLibrariesPathProvider {
-      return ClasspathBasedStandardLibrariesPathProvider
-   }
+   override fun createKotlinStandardLibrariesPathProvider(): KotlinStandardLibrariesPathProvider =
+      ClasspathBasedStandardLibrariesPathProvider
 
    override fun configure(builder: TestConfigurationBuilder) {
       super.configure(builder)
-
 
       with(builder) {
          configurePlugin()

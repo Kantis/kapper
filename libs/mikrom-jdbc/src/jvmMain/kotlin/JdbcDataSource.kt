@@ -1,8 +1,8 @@
-package com.github.kantis.mikrom.jdbc
+package io.github.kantis.mikrom.jdbc
 
-import com.github.kantis.mikrom.datasource.DataSource
-import com.github.kantis.mikrom.datasource.Rollback
-import com.github.kantis.mikrom.datasource.Transaction
+import io.github.kantis.mikrom.datasource.DataSource
+import io.github.kantis.mikrom.datasource.Rollback
+import io.github.kantis.mikrom.datasource.Transaction
 import org.slf4j.LoggerFactory
 
 public class JdbcDataSource(private val underlyingDataSource: javax.sql.DataSource) : DataSource {
