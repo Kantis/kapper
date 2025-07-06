@@ -1,22 +1,13 @@
 plugins {
    `java-gradle-plugin`
    id("com.gradle.plugin-publish") version "1.1.0"
-   kotlin("jvm") version libs.versions.kotlin.get()
-   id("mikrom.conventions.base")
+   id("mikrom.conventions.lang.kotlin-jvm")
    id("mikrom.conventions.api-validation")
 }
 
 group = "io.github.kantis.mikrom"
 
-kotlin {
-   explicitApi()
-   jvmToolchain {
-      languageVersion.set(JavaLanguageVersion.of(21))
-   }
-}
-
 dependencies {
-   implementation(kotlin("stdlib"))
    implementation(kotlin("gradle-plugin-api"))
 }
 

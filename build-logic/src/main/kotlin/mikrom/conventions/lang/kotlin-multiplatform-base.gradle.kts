@@ -7,8 +7,8 @@ import org.jetbrains.kotlin.gradle.targets.jvm.KotlinJvmTarget
 import org.jetbrains.kotlin.gradle.testing.KotlinTaskTestRun
 
 plugins {
-   id("mikrom.conventions.base")
    kotlin("multiplatform")
+   id("mikrom.conventions.base")
    id("io.kotest.multiplatform")
    id("org.jlleitschuh.gradle.ktlint")
 }

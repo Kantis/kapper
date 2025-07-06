@@ -1,6 +1,5 @@
 package io.github.kantis.mikrom.gradle
 
-import io.github.kantis.mikrom.gradle.MikromGradleExtension
 import org.gradle.api.Project
 import org.gradle.api.provider.Provider
 import org.jetbrains.kotlin.gradle.plugin.KotlinCompilation

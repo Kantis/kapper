@@ -1,7 +1,6 @@
 plugins {
-   id("mikrom.conventions.base")
+   id("mikrom.conventions.lang.kotlin-jvm")
    id("mikrom.conventions.api-validation")
-   kotlin("jvm") version libs.versions.kotlin.get()
    `java-test-fixtures`
 }
 
@@ -9,12 +8,6 @@ group = "io.github.kantis.mikrom"
 version = "0.1.0-SNAPSHOT"
 
 kotlin {
-   explicitApi()
-
-   jvmToolchain {
-      languageVersion.set(JavaLanguageVersion.of(21))
-   }
-
    compilerOptions {
       optIn.add("org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi")
       optIn.add("org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI")

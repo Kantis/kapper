@@ -1,5 +1,3 @@
-rootProject.name = "mikrom"
-
 apply(from = "../build-logic/repositories.gradle.kts")
 
 includeBuild("../build-logic")
