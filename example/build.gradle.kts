@@ -1,11 +1,10 @@
 plugins {
-   kotlin("multiplatform") version libs.versions.kotlin.get()
+   id("mikrom.conventions.lang.kotlin-multiplatform-jvm")
    id("io.github.kantis.mikrom.gradle-plugin")
 }
 
 kotlin {
    compilerOptions { freeCompilerArgs.add("-Xcontext-receivers") }
-   jvm()
 
    sourceSets {
       jvmMain {

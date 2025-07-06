@@ -40,7 +40,7 @@ public class MikromFirDeclarationGenerationExtension(
          Name.identifier("RowMapper"),
       ).createConeType(session, typeArguments = arrayOf(typeArgument))
 
-   val mapStringToAny by lazy {
+   private val mapStringToAny by lazy {
       StandardClassIds.Map.createConeType(
          session,
          typeArguments = arrayOf(session.builtinTypes.stringType.coneType, session.builtinTypes.anyType.coneType),

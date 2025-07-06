@@ -8,6 +8,12 @@ group = "io.github.kantis.mikrom"
 version = "0.1.0-SNAPSHOT"
 
 kotlin {
+   explicitApi()
+
+   jvmToolchain {
+      languageVersion.set(JavaLanguageVersion.of(21))
+   }
+
    compilerOptions {
       optIn.add("org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi")
       optIn.add("org.jetbrains.kotlin.ir.symbols.UnsafeDuringIrConstructionAPI")
@@ -39,7 +45,7 @@ dependencies {
    testFixturesApi(kotlin("compiler-internal-test-framework"))
    testFixturesApi(kotlin("compiler"))
 
-//   mikromRuntimeClasspath("io.github.kantis.mikrom:mikrom-core")
+   mikromRuntimeClasspath("io.github.kantis.mikrom:mikrom-core")
 
    testRuntimeOnly(kotlin("reflect"))
    testRuntimeOnly(kotlin("test"))

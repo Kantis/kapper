@@ -38,10 +38,10 @@ import org.jetbrains.kotlin.name.FqName
 import org.jetbrains.kotlin.name.Name
 import kotlin.collections.forEachIndexed
 
-class MikromIrVisitor(
+internal class MikromIrVisitor(
    private val context: IrPluginContext,
 ) : IrVisitorVoid() {
-   companion object {
+   private companion object {
       private val MIKROM_ORIGIN = IrDeclarationOrigin.GeneratedByPlugin(MikromGenerateRowMapperKey)
 
       private val ILLEGAL_STATE_EXCEPTION_FQ_NAME =

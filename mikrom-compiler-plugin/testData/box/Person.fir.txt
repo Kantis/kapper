@@ -4,7 +4,7 @@ FILE: Person.kt
         R|kotlin/test/assertEquals|<R|Person|>(R|<local>/person|, R|/Person.Person|(String(Brian), String(bnorm), Int(-1)))
         ^box String(OK)
     }
-    @R|com/github/kantis/mikrom/generator/RowMapped|() public final data class Person : R|kotlin/Any| {
+    @R|io/github/kantis/mikrom/generator/RowMapped|() public final data class Person : R|kotlin/Any| {
         public constructor(name: R|kotlin/String|, nickname: R|kotlin/String?| = R|<local>/name|, age: R|kotlin/Int| = Int(0)): R|Person| {
             super<R|kotlin/Any|>()
         }
@@ -26,7 +26,7 @@ FILE: Person.kt
 
         public final fun copy(name: R|kotlin/String| = this@R|/Person|.R|/Person.name|, nickname: R|kotlin/String?| = this@R|/Person|.R|/Person.nickname|, age: R|kotlin/Int| = this@R|/Person|.R|/Person.age|): R|Person|
 
-        public final object RowMapper : R|com/github/kantis/mikrom/RowMapper<Person>| {
+        public final object RowMapper : R|io/github/kantis/mikrom/RowMapper<Person>| {
             public final fun mapRow(row: R|kotlin/collections/Map<kotlin/String, kotlin/Any>|): R|Person|
 
             private constructor(): R|Person.RowMapper|
