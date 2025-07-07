@@ -50,6 +50,10 @@ tasks {
 
    named("check").configure {
       dependsOn(gradle.includedBuilds.map { it.task(":check") })
+      dependsOn(gradle.includedBuild("mikrom").task(":mikrom-core:check"))
+      dependsOn(gradle.includedBuild("mikrom").task(":mikrom-jdbc:check"))
+      // TODO: R2dbc is not working yet..
+//      dependsOn(gradle.includedBuild("mikrom").task(":mikrom-r2dbc:check"))
       dependsOn(apiCheck)
    }
 

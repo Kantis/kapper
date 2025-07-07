@@ -40,7 +40,7 @@ dependencies {
    testFixturesApi(kotlin("compiler-internal-test-framework"))
    testFixturesApi(kotlin("compiler"))
 
-   mikromRuntimeClasspath(libs.mikrom.core)
+   mikromRuntimeClasspath("io.github.kantis:mikrom-core:${project.version}")
 
    testRuntimeOnly(kotlin("reflect"))
    testRuntimeOnly(kotlin("test"))
@@ -48,7 +48,7 @@ dependencies {
    testRuntimeOnly(kotlin("annotations-jvm"))
 }
 
-tasks.withType<Test> {
+tasks.withType<Test>().configureEach {
    dependsOn(mikromRuntimeClasspath)
    inputs.dir(layout.projectDirectory.dir("testData"))
       .withPropertyName("testData")

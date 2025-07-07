@@ -46,8 +46,8 @@ context(SuspendingTransaction)
 public suspend fun Mikrom.execute(
    query: Query,
    params: Flow<List<Any>>,
-) {
-   executeInTransaction(query, params)
+): Flow<Unit> {
+   return executeInTransaction(query, params)
 }
 
 context(SuspendingTransaction)

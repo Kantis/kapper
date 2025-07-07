@@ -20,7 +20,7 @@ public interface SuspendingTransaction {
    public suspend fun executeInTransaction(
       query: Query,
       params: Flow<List<*>>,
-   )
+   ): Flow<Unit>
 
    public suspend fun query(
       query: Query,
