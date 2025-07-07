@@ -5,44 +5,49 @@ import io.github.kantis.mikrom.Row
 import io.github.kantis.mikrom.datasource.SuspendingTransaction
 import io.r2dbc.spi.Connection
 import io.r2dbc.spi.Statement
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flatMapConcat
-import kotlinx.coroutines.flow.flatMapMerge
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.FlowCollector
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.reactive.asFlow
-import kotlinx.coroutines.reactive.awaitLast
-import kotlinx.coroutines.reactive.awaitSingle
+import kotlinx.coroutines.reactive.collect
+import kotlin.coroutines.CoroutineContext
 
-public class R2dbcTransaction(private val connection: Connection) : SuspendingTransaction {
+public class R2dbcTransaction(private val connection: Connection, override val coroutineContext: CoroutineContext) : SuspendingTransaction {
+   // This is probably a pretty niche use-case, streaming data into the DB... should probably just use a list of params..
    override suspend fun executeInTransaction(
       query: Query,
       params: Flow<List<*>>,
-   ): Flow<Unit> {
+   ): Job = launch {
       val statement = connection.createStatement(query.value)
       params.collect { p ->
          println("Executing query: ${query.value} with params: $p")
          bindParameters(statement, p)
-         statement.execute().awaitLast()
+         statement.execute {
+            println("executeInTransaction returned result: $it")
+         }
       }
-
-      return params.map { }
    }
 
    override suspend fun query(
       query: Query,
       params: List<*>,
-   ): Flow<Row> {
+   ): Flow<Row> = flow {
       val statement = connection.createStatement(query.value)
       bindParameters(statement, params)
-      return statement
-         .execute()
+      statement.execute { emit(it) }
+   }
+
+   private suspend fun Statement.execute(collector: FlowCollector<Row>) {
+      execute()
          .asFlow()
-         .flatMapConcat { result ->
+         .collect { result ->
             result.map { row, rowMetadata ->
                rowMetadata.columnMetadatas.associate { metadata ->
                   metadata.name to row.get(metadata.name)
                }
-            }.asFlow()
+            }.asFlow().collect(collector)
          }
    }
 
@@ -52,7 +57,8 @@ public class R2dbcTransaction(private val connection: Connection) : SuspendingTr
    ) {
       params.forEachIndexed { index, param ->
          if (param == null) {
-            statement.bindNull(index, Unit::class.java)
+            // TODO: How can we know the type of the column?
+            statement.bindNull(index, Object::class.java)
          } else {
             statement.bind(index, param)
          }

@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.toList
+import kotlinx.coroutines.job
 
 private data class Book(val author: String, val title: String, val numberOfPages: Int)
 
@@ -46,12 +47,10 @@ class MikromR2dbcTest : FunSpec(
                   listOf("JRR Tolkien", "The Hobbit", 310),
                   listOf("George Orwell", "1984", 328),
                ),
-            )
-         }
+            ).join()
 
-         dataSource.suspendingTransaction {
             mikrom
-               .queryFor<Book>(Query("SELECT * FROM books"))
+               .queryFor<Book>(Query("SELECT * FROM books ORDER BY author ASC"))
                .toList()
                .shouldContainExactly(
                   Book("George Orwell", "1984", 328),

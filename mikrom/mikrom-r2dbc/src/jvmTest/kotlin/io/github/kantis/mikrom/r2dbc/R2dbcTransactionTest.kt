@@ -7,6 +7,7 @@ import io.github.kantis.mikrom.execute
 import io.github.kantis.mikrom.queryFor
 import io.github.kantis.mikrom.r2dbc.helpers.preparePostgresDatabase
 import io.kotest.core.spec.style.FunSpec
+import io.kotest.matchers.collections.shouldContainExactly
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.toList
@@ -37,6 +38,12 @@ class R2dbcTransactionTest : FunSpec(
          )
       }
 
+      beforeEach {
+         dataSource.suspendingTransaction {
+            mikrom.execute(Query("TRUNCATE TABLE test_records"))
+         }
+      }
+
       test("transaction commits successfully") {
          dataSource.suspendingTransaction {
             mikrom.execute(
@@ -57,8 +64,8 @@ class R2dbcTransactionTest : FunSpec(
          val result = dataSource.suspendingTransaction {
             mikrom.execute(
                Query("INSERT INTO test_records (name) VALUES ($1)"),
-               flowOf(listOf("test record")),
-            )
+               flowOf(listOf("record to rollback")),
+            ).join()
 
             Rollback
          }
@@ -68,7 +75,7 @@ class R2dbcTransactionTest : FunSpec(
          // Verify data was not persisted
          dataSource.suspendingTransaction {
             val records = mikrom.queryFor<TestRecord>(Query("SELECT * FROM test_records")).toList()
-            records.size shouldBe 0
+            records.shouldContainExactly()
          }
       }
 
@@ -78,7 +85,7 @@ class R2dbcTransactionTest : FunSpec(
                mikrom.execute(
                   Query("INSERT INTO test_records (name) VALUES ($1)"),
                   flowOf(listOf("test record")),
-               )
+               ).join()
 
                throw RuntimeException("Test exception")
             }

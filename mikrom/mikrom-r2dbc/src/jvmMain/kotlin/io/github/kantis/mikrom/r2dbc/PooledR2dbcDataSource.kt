@@ -4,6 +4,7 @@ import io.github.kantis.mikrom.datasource.Rollback
 import io.github.kantis.mikrom.datasource.SuspendingDataSource
 import io.github.kantis.mikrom.datasource.SuspendingTransaction
 import io.r2dbc.pool.ConnectionPool
+import kotlinx.coroutines.currentCoroutineContext
 import kotlinx.coroutines.reactive.awaitFirstOrNull
 import kotlinx.coroutines.reactive.awaitSingle
 import org.slf4j.LoggerFactory
@@ -15,7 +16,7 @@ public class PooledR2dbcDataSource(private val underlyingConnectionPool: Connect
       connection.beginTransaction().awaitFirstOrNull()
 
       return try {
-         val transaction = R2dbcTransaction(connection)
+         val transaction = R2dbcTransaction(connection, currentCoroutineContext())
          val result = transaction.block()
 
          when (result) {

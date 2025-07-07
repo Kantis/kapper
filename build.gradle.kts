@@ -53,7 +53,7 @@ tasks {
       dependsOn(gradle.includedBuild("mikrom").task(":mikrom-core:check"))
       dependsOn(gradle.includedBuild("mikrom").task(":mikrom-jdbc:check"))
       // TODO: R2dbc is not working yet..
-//      dependsOn(gradle.includedBuild("mikrom").task(":mikrom-r2dbc:check"))
+      dependsOn(gradle.includedBuild("mikrom").task(":mikrom-r2dbc:check"))
       dependsOn(apiCheck)
    }
 

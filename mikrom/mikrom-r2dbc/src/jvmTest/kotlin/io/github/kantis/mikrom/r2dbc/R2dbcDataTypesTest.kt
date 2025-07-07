@@ -51,20 +51,28 @@ class R2dbcDataTypesTest : FunSpec({
    beforeSpec {
       dataSource = preparePostgresDatabase(
          """
-                CREATE TABLE data_types (
-                    id SERIAL PRIMARY KEY,
-                    string_field VARCHAR(255),
-                    int_field INTEGER,
-                    long_field BIGINT,
-                    boolean_field BOOLEAN,
-                    double_field DOUBLE PRECISION,
-                    decimal_field DECIMAL(10,2),
-                    date_field DATE,
-                    timestamp_field TIMESTAMP,
-                    uuid_field UUID
-                )
+             CREATE TABLE data_types (
+                 id SERIAL PRIMARY KEY,
+                 string_field VARCHAR(255),
+                 int_field INTEGER,
+                 long_field BIGINT,
+                 boolean_field BOOLEAN,
+                 double_field DOUBLE PRECISION,
+                 decimal_field DECIMAL(10,2),
+                 date_field DATE,
+                 timestamp_field TIMESTAMP,
+                 uuid_field UUID
+             )
          """.trimIndent(),
       )
+   }
+
+   beforeEach {
+      dataSource.suspendingTransaction {
+         println("Truncating data_types table")
+         mikrom.execute(Query("TRUNCATE TABLE data_types")).join()
+         println("Truncated data_types table")
+      }
    }
 
    test("handle various PostgreSQL data types") {
@@ -95,8 +103,7 @@ class R2dbcDataTypesTest : FunSpec({
                   testUuid,
                ),
             ),
-         )
-         fail("foo")
+         ).join()
 
          val records = mikrom.queryFor<DataTypeRecord>(Query("SELECT * FROM data_types")).toList()
          records.size shouldBe 1
@@ -125,8 +132,8 @@ class R2dbcDataTypesTest : FunSpec({
                     ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
                """.trimIndent(),
             ),
-            flowOf(listOf(null, null, null, null, null, null, null, null, null)),
-         )
+            listOf(null, null, null, null, null, null, null, null, null)
+         ).join()
 
          val records = mikrom.queryFor<DataTypeRecord>(Query("SELECT * FROM data_types")).toList()
          records.size shouldBe 1

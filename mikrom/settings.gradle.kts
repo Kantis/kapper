@@ -1,5 +1,6 @@
-includeBuild("../build-logic")
+rootProject.name = "mikrom"
 
+includeBuild("../build-logic")
 apply(from = "../build-logic/repositories.gradle.kts")
 
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
